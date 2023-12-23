@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2022.8.6)  17 DEC 2023 12:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2022.8.6)  23 DEC 2023 09:26
 entering extended mode
 **"c:/Users/marco/OneDrive - Università degli Studi di Padova/Marco/UniPD/MSc Data Science/Biological Data/Project/report/egpaper_final.tex"
 (c:/Users/marco/OneDrive - Università degli Studi di Padova/Marco/UniPD/MSc Data Science/Biological Data/Project/report/egpaper_final.tex
@@ -766,21 +766,35 @@ Underfull \hbox (badness 10000) in paragraph at lines 82--83
 [1{C:/Users/marco/AppData/Local/MiKTeX/pdftex/config/pdftex.map}
 
 
-] [2
+]
+<img/model_diagram.png, id=16, 902.37125pt x 629.35126pt>
+File: img/model_diagram.png Graphic file (type png)
+<use img/model_diagram.png>
+Package pdftex.def Info: img/model_diagram.png  used on input line 105.
+(pdftex.def)             Requested size: 225.59225pt x 157.33742pt.
 
-] (egpaper_final.aux) ) 
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[2
+
+] [3 <./img/model_diagram.png>] (egpaper_final.aux)
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 12977 strings out of 479334
- 184246 string characters out of 2868885
- 466539 words of memory out of 3000000
- 30188 multiletter control sequences out of 15000+200000
+ 12986 strings out of 479334
+ 184374 string characters out of 2868885
+ 467405 words of memory out of 3000000
+ 30192 multiletter control sequences out of 15000+200000
  435589 words of font info for 81 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  97i,11n,102p,403b,426s stack positions out of 5000i,500n,10000p,200000b,50000s
 {F:/Programmi/MikTeX/fonts/enc/dvips/libertine/lbtn_afusau.enc}{F:/Programmi/MikTeX/fonts/enc/dvips/libertine/lbtn_edcawa.enc}{F:/Programmi/MikTeX/fonts/enc/dvips/base/8r.enc}<F:/Programmi/MikTeX/fonts/type1/public/libertine/LinBiolinumT.pfb><F:/Programmi/MikTeX/fonts/type1/public/libertine/LinBiolinumTB.pfb><F:/Programmi/MikTeX/fonts/type1/public/libertine/LinBiolinumTI.pfb><F:/Programmi/MikTeX/fonts/type1/urw/courier/ucrr8a.pfb>
-Output written on egpaper_final.pdf (2 pages, 166689 bytes).
+Output written on egpaper_final.pdf (3 pages, 208690 bytes).
 PDF statistics:
- 57 PDF objects out of 1000 (max. 8388607)
- 15 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 65 PDF objects out of 1000 (max. 8388607)
+ 17 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -853,6 +853,13 @@ INPUT F:\Programmi\MikTeX\fonts\vf\public\libertine\LinBiolinumT-tlf-ts1.vf
 INPUT F:\Programmi\MikTeX\fonts\tfm\public\libertine\LinBiolinumT-tlf-ts1--base.tfm
 INPUT F:\Programmi\MikTeX\fonts\vf\public\libertine\LinBiolinumTB-tlf-ot1.vf
 INPUT F:\Programmi\MikTeX\fonts\tfm\public\libertine\LinBiolinumTB-tlf-ot1--base.tfm
+INPUT .\img\model_diagram.png
+INPUT .\img\model_diagram.png
+INPUT img\model_diagram.png
+INPUT .\img\model_diagram.png
+INPUT .\img\model_diagram.png
+INPUT .\img\model_diagram.png
+INPUT .\img\model_diagram.png
 INPUT egpaper_final.aux
 INPUT F:\Programmi\MikTeX\fonts\enc\dvips\libertine\lbtn_afusau.enc
 INPUT F:\Programmi\MikTeX\fonts\enc\dvips\libertine\lbtn_edcawa.enc
