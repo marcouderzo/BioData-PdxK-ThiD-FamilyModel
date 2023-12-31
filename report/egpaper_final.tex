@@ -6,6 +6,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{booktabs}
 
 % Include other packages here, before hyperref.
 
@@ -100,12 +101,22 @@ As specified in the project requirements, in order to make the task manageable i
 
 \subsection{Model Development}
 
-\begin{figure*}[!h]
-    \centering
-    \includegraphics[scale=0.25]{img/model_diagram.png}
-    \caption{Diagram of the Conv-LSTM model.}
-    \label{fig:model_diagram}
-\end{figure*}
+The diagram of the model's architecture is shown below. \\
+
+\includegraphics[scale=0.25]{img/model_diagram.png} \\
+
+The hyperparameters of the model are listed in the following table. \\
+
+\begin{tabular}{lcc}
+    \toprule
+    Hyperparameter & Value \\
+    \midrule
+    Learning Rate & 0.001 \\
+    Epochs & 50 \\
+    Batch Size & 32 \\
+    \bottomrule
+\end{tabular} \\
+
 
 \section{Results}
 

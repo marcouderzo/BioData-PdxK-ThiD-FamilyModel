@@ -1,6 +1,6 @@
-PWD c:\Users\marco\OneDrive - Università degli Studi di Padova\Marco\UniPD\MSc Data Science\Biological Data\Project\report
+PWD c:\Users\marco\OneDrive - Università degli Studi di Padova\Marco\UniPD\MSc Data Science\Biological Data\Project\BioData-ProteinFunctionPrediction\report
 INPUT C:\Users\marco\AppData\Local\MiKTeX\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\marco\OneDrive - Università degli Studi di Padova\Marco\UniPD\MSc Data Science\Biological Data\Project\report\egpaper_final.tex
+INPUT c:\Users\marco\OneDrive - Università degli Studi di Padova\Marco\UniPD\MSc Data Science\Biological Data\Project\BioData-ProteinFunctionPrediction\report\egpaper_final.tex
 OUTPUT egpaper_final.log
 INPUT F:\Programmi\MikTeX\tex\latex\base\article.cls
 INPUT F:\Programmi\MikTeX\tex\latex\base\article.cls
@@ -387,6 +387,17 @@ INPUT F:\Programmi\MikTeX\tex\latex\amsfonts\amsfonts.sty
 INPUT F:\Programmi\MikTeX\tex\latex\amsfonts\amsfonts.sty
 INPUT F:\Programmi\MikTeX\tex\latex\amsfonts\amsfonts.sty
 INPUT F:\Programmi\MikTeX\tex\latex\amsfonts\amsfonts.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
+INPUT F:\Programmi\MikTeX\tex\latex\booktabs\booktabs.sty
 INPUT F:\Programmi\MikTeX\tex\latex\hyperref\hyperref.sty
 INPUT F:\Programmi\MikTeX\tex\latex\hyperref\hyperref.sty
 INPUT F:\Programmi\MikTeX\tex\latex\hyperref\hyperref.sty
@@ -860,6 +871,36 @@ INPUT .\img\model_diagram.png
 INPUT .\img\model_diagram.png
 INPUT .\img\model_diagram.png
 INPUT .\img\model_diagram.png
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\libertine\LinLibertineT-tlf-ot1.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmi.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmi7.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmi5.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsy.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsy7.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsy5.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexx.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexx.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexx.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmia.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmia.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\nxlmia.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsym.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsym.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsym.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsyc.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsyc.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxsyc.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexa.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexa.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\newtx\ntxexa.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT F:\Programmi\MikTeX\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
 INPUT egpaper_final.aux
 INPUT F:\Programmi\MikTeX\fonts\enc\dvips\libertine\lbtn_afusau.enc
 INPUT F:\Programmi\MikTeX\fonts\enc\dvips\libertine\lbtn_edcawa.enc
