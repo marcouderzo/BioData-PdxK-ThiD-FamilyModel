@@ -1,5 +1,11 @@
-# CAFA-like Protein Function Prediction
+<h1 align="center"> CAFA-like Protein Function Prediction </h1>
 
-<bf> Biological Data Final Project, A.Y. 2023/24, Università degli Studi di Padova </bf>
+<p align="center">
+<b> Biological Data Final Project, A.Y. 2023/24, Università degli Studi di Padova </b>
+</p>
 
-Authors: Marco Uderzo, Tanner Graves, Claudio Palmeri
+<p align="center">
+<b> Authors: Marco Uderzo, Tanner Graves, Claudio Palmeri </b>
+</p>
+
+
