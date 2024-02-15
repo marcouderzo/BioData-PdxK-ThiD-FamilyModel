@@ -26,9 +26,8 @@
 \begin{document}
 
 %%%%%%%%% TITLE
-%\title{CAFA-like Protein Functional Annotation Prediction with Hybrid Convolutional Long Short-Term Memory Recurrent Neural Networks}
 
-\title{CAFA-like Protein Biological Function Prediction by Leveraging ProtT5 PLM Embeddings and Deep Feed-Forward Neural Networks}
+\title{Modelling and Functional Characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase Domain Family}
 
 \author{
 Marco Uderzo\\
@@ -54,170 +53,115 @@ Claudio Palmeri \\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-    The prediction of the biological function of proteins has been a fundamental topic of bioinformatics. Performing the wet-lab experiments 
-    to determine these functions is very expensive and time consuming, so it is crucial to develop computational 
-    methods for automated function prediction. Gene Ontology is a standardized system to categorize and describe function 
-    in a hierarchical manner.
-    This paper concerns the development and evaluation of a Deep Learning model to predict the biological function of proteins, especially by leveraging the per-protein embeddings generated the ProtT5 Protein Language Model.
+    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family.
+    The models' accuracy was benchmarked against Pfam annotations in the SwissProt database. Further, the project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching.
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
 \section{Introduction}
 
-\subsection{Protein Biological Function Prediction}
-Proteins are responsible for many activities in our tissues, organs, and bodies and they also play a central role in the structure and function of cells.
-The accurate assignment of biological function to the protein is key to understanding life at the molecular level. However, assigning function to any 
-specific protein can be made difficult due to the multiple functions many proteins have, along with their ability 
-to interact with multiple partners. More knowledge of the functions assigned to proteins, potentially aided by Data Science, could 
-lead to curing diseases and, overrall, drastically improving human health.\\
+\subsection{Protein Domains}
 
-Gene Ontology is a standardized system to categorize and describe function in a hierarchical manner.
-In order to categorize and classify functions, Gene Ontology has separated the functions into 3 sub-ontologies:
+In molecular biology, a protein domain represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
+
+\subsection{Pyridoxamine Kinase (CHECK FOR ERRORS)}
+
+Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
+
 \begin{itemize}
-\item {\bf Molecular Function}: functions that the protein performs at the molecular level.
-\item {\bf Biological Process}: events or processes that the protein is involved in.
-\item {\bf Cellular Component}: locations in the cell that the protein is active. 
-\end{itemize}
-These sub-ontologies are completely separated from each other, and the terms in them do not have inter-relations between them. \\
+\item \textbf{Pyridoxamine Kinase}: This enzyme is involved in the vitamin B6 metabolism pathway. Vitamin B6 exists in different forms, including pyridoxamine, pyridoxal, and pyridoxine. Pyridoxamine kinase specifically catalyzes the phosphorylation of pyridoxamine, converting it into pyridoxamine 5'-phosphate. This is an important step in the salvage pathway of vitamin B6, which is crucial for its recycling and maintenance within the cell.
 
-Overall, this project concerns the development and evaluation of a Deep Learning model to predict the biological function of proteins.
-
-
-
-\subsection{Simplifications from CAFA}
-As specified in the project requirements, in order to make the task manageable in terms of computational complexity, some simplifications were made.
-\begin{itemize}
-\item Only functions that have more than 50, 250, 50 instances respectively in Molecular Function (MF), Biological Process (BP), and Cellular Componet (CC) have been gathered. 
-\item Proteins with sequence length of more than 2000 have been removed.
-\item Only functional annotations with experimental evidence code, TAS, and IC have been considered.
+\item \textbf{Phosphomethylpyrimidine Kinase}: This enzyme is a part of the thiamine (vitamin B1) biosynthetic pathway. It catalyzes the phosphorylation of hydroxymethylpyrimidine (HMP) to hydroxymethylpyrimidine phosphate. This step is essential in the synthesis of thiamine pyrophosphate (TPP), an active form of vitamin B1. TPP is a vital coenzyme in several enzymatic reactions, particularly those involved in carbohydrate metabolism.
 \end{itemize}
 
+Both these enzymes, due to their roles in vitamin metabolism, are crucial for maintaining cellular health and function. Disruptions in these pathways can lead to vitamin deficiencies, affecting numerous biological processes.
 
 \section{Methods}
 
-\subsection{Training Dataset Description}
+\subsection{Model Building}
 
-The full training dataset for the project contains the following files:
-
-\begin{itemize}
-    \item \textit{train\_set.tsv}: The proteins, their Gene Ontology (GO) annotations, and their corresponding aspects are given in a tab-separated file. The GO annotations that are given for each protein are already propagated to the root of the ontology.
-
-    \item \textit{train\_ids.txt}: This file contains the accession IDs of the proteins that are given. It contains about 123,000 proteins.
-
-    \item \textit{train.fasta}: This file contains the sequence of the train proteins in FASTA format.
-
-    \item \textit{train\_embeddings.h5}: This file contains ProtT5 embeddings for each protein in the train set.
-
-    \item \textit{train\_protein2ipr.dat}: This file contains the InterPro domains for proteins of the training set.
-
-    \item \textit{go-basic.obo}: This file contains the whole Ontology terms and the relationships between them. Note that the only relationships that we consider are \texttt{part\_of} and \texttt{is\_a}.
-\end{itemize}
-
-In our project we are not using all of these files. For brevity, we now describe more in detail the data we decided to use as our final training set.
+Firstly, we queried \textit{UniProt} to retrieve homologous proteins starting from the \texttt{A0A0J9X285} protein, having Pfam domain \texttt{PF08543}. The search returns 150 proteins, considering only SwissProt entries. We then generated a Multiple Sequence Alignment (MSA) starting from the retrieved hits using Clustal Omega.
+(Edited MSA with Jalview?)
+A Position-Specific Scoring Matrix (PSSM) was obtained by submitting a query to the \texttt{PSI-BLAST} tool, with the SwissProt database as the reference, and an HMM model was built starting from the MSA. (check this)
 
 
-\subsubsection{Gene Ontology Annotations and Aspects}
+\subsection{Model Evaluation}
 
-Gene Ontology provides a framework for the representation of gene and gene product attributes across all species. In our file, each protein is annotated with relevant GO terms. These annotations describe the roles of proteins at various levels, such as their biological processes, cellular components, and molecular functions.
+Using \texttt{hmmsearch}, and starting from the \texttt{PSI-BLAST} hits, we generated the predictions, extracting the list of alignments from the HMM search results, in order to understand the sequence alignments that relate to the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family.
+After defining our ground truth by finding all proteins in \textit{SwissProt} with the \texttt{PF08543} domain, we proceeded to evaluating the PSSM model.
 
-By visualizing the distribution of GO\_terms in our train\_set.tsv file, we realize that the data is massively unbalanced, with some terms being overrepresented, where as most are underrepresented.
-Indeed, they tend to follow a right-skewed exponential distribution, forming a long-tail fenomenon.
-Below, we present the distribution of the top 100 Gene Ontology terms.
+
+
+\subsubsection{PSSM Protein-Level Performance Evaluation}
+
+The protein-level performances of the PSSM model are shown in the table below:
 
 \begin{center}
-    \includegraphics[scale=0.25]{img/go_terms_distribution.png} \\
-\end{center}
-
-
-\subsubsection{ProtT5 PLM Embeddings}
-
-ProtT5 is an advanced language model specifically designed for processing and interpreting protein sequences. Developed as an extension of the T5 (Text-to-Text Transfer Transformer) framework, ProtT5 is able to capture the complex patterns and structures inherent in protein sequences.
-ProtT5 embeddings are vector representations of protein sequences generated by the ProtT5 model. These embeddings encapsulate the contextual information of amino acids in a protein sequence, effectively representing the sequence in a high-dimensional space.
-
-\subsection{Dataset Preprocessing}
-
-Protein IDs and their aspect and GO\_term are loaded from the tsv train\_set.tsv file, and for each protein, 
-its embeddings in .h5 format are also parsed. Each protein embedding consists in 1024 columns.
-The first step of our study was to perform some Explorative Data Analysis on the dataset at our disposal.
-As already mentioned above, Gene Ontology terms are massiveley unbalanced. This is a very common occurrence when working
-with biological data, which is often imbalanced, biased or scarce.
-The most represented aspect is by far \texttt{cellular\_component} followed by \texttt{biological\_process}, with less than half of occurrences,
-which is also consistent with the number of unique proteins having such terms (?).
-Therefore, we needed to perform data augmentation, by undersampling some of the overrepresented terms and carefully oversampling some of the underrepresented ones.
-
-
-\begin{center}
-    \begin{tabular}{lccc}
+    \begin{tabular}{ccc}
         \toprule
-        Type & Tool & Class & Value\\
+        Metric & Value \\
         \midrule
-                      & ? & ? & ?\\
-                      & ? & ? & ?\\
-        Undersampling & ? & ? & ?\\
-                      & ? & ? & ?\\
-                      & ? & ? & ?\\
-                      & ? & ? & ?\\
-        \midrule
-                      & ? & ? & ?\\
-        Oversampling  & ? & ? & ?\\
-                      & ? & ? & ?\\
-                      & ? & ? & ?\\
+        Precision & 0.894 \\
+        Recall & 0.227 \\
+        F1-Score & 0.361 \\
+        Balanced Accuracy & 0.613 \\
+        MCC & 0.45 \\
         \bottomrule
-    \end{tabular} \\
-    \end{center}
-    
-
-\subsection{Model Development}
-
-Our training data contains mostly tabular data, except the FASTA protein sequences. Though, we already have embeddings from the ProtT5 Protein Language Model, which is based on the Transformer architecture, known for its efficacy in dealing with long time-space-dependent data. Therefore, using more advanced architecture like RNNs to deal with the raw FASTA sequences would most likely not yield any better result than a Deep Neural Network. RNN-based models could have been leveraged in case we had at our disposal per-residue ProtT5 embeddings, instead of just per-protein embeddings. \\
-
-
-
-A summary of the model's architecture is shown below.
+    \end{tabular}
+\end{center} 
 
 \begin{center}
-\begin{tabular}{lccc}
-    \toprule
-    Layer Type & Output Shape & Param \# & Activation\\
-    \midrule
-    Dense & (None, 128) & 131200 & ReLU\\
-    Dropout & (None, 128) & 0 & N/A\\
-    Dense &  (None, 256) & 33024 & ReLU \\
-    Output\_cc & (None, 625) & 320625 & Sigmoid \\
-    \bottomrule
-\end{tabular} \\
+    \includegraphics[scale=0.5]{img/pssm_protein_level_eval.png}
 \end{center}
 
-%\includegraphics[scale=0.25]{img/model_diagram.png} \\
+The PSSM model has a relatively high number of true negatives (TN: 570,676) and a moderate number of true positives (TP: 34), suggesting that the model is very good at identifying non-members of the family (true negatives) but not as strong at identifying actual members (true positives). The false negatives (FN: 116) are significantly higher than the false positives (FP: 4), indicating that the model tends to miss more actual family members than it incorrectly identifies as family members.
 
-The hyperparameters of the model are listed in the following table. \\
+\subsubsection{PSSM Residue-Level Performance Evaluation}
+
+The residue-level performances of the PSSM model are shown in the table below:
+
+
 
 \begin{center}
-\begin{tabular}{lcc}
-    \toprule
-    Hyperparameter & Value \\
-    \midrule
-    Learning Rate & 0.001 \\
-    Epochs & 50 \\
-    Batch Size & 32 \\
-    Optimizer & Adam \\
-    Loss Function & Binary Cross-Entropy\\
-    \bottomrule
-\end{tabular} \\
+    \begin{tabular}{ccc}
+        \toprule
+        Metric & Value \\
+        \midrule
+        Precision & 0.91 \\
+        Recall & 0.28
+        F1-Score & 0.429 \\
+        Balanced Accuracy & 0.64 \\
+        MCC & 0.505 \\
+        \bottomrule
+    \end{tabular}
+\end{center} 
+
+\begin{center}
+    \includegraphics[scale=0.4]{img/pssm_residue_level_eval.png}
 \end{center}
+
+To assess the performance of the PSSM model at a detailed, residue-level granularity,
+we visualized the overlaps between PFAM domain predictions and actual annotated domains from a database (?). In the plot, each row represents a protein and each column a residue position, color-coded by the prediction accuracy. 
+
+\subsubsection{HMM Performance Evaluation}
+
+\begin{center}
+    \includegraphics[scale=0.4]{img/hmm_eval.png}
+\end{center}
+
+It is worth noting that the HMM model's performance is robust with respect to the starting alignment. (metrics here).\\
+
+\subsection{Model Refinement}
+
+
+
+
 
 
 \section{Results}
 
-\subsection{Performance Evaluation}
-
 \section{Discussion}
 
-\section{Usage Overview}
-
-\section{Code Availability}
-The datasets used and all the code used for this project is available
-at the following \href{https://github.com/marcouderzo/BioData-ProteinFunctionPrediction}{GitHub Repository}.
 
 
 
