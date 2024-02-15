@@ -53,8 +53,7 @@ Claudio Palmeri \\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family.
-    The models' accuracy was benchmarked against Pfam annotations in the SwissProt database. Further, the project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching.
+    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, the project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching. (Include findings in the abstract)
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
@@ -76,7 +75,11 @@ Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase family is a group of enzymes 
 
 Both these enzymes, due to their roles in vitamin metabolism, are crucial for maintaining cellular health and function. Disruptions in these pathways can lead to vitamin deficiencies, affecting numerous biological processes.
 
-\section{Methods}
+\subsection{Objective of the Study}
+
+This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. (Write a small preamble of the goals of this project, even if it is similar to what is written in the abstract).
+
+\section{Methods and Results}
 
 \subsection{Model Building}
 
@@ -111,7 +114,7 @@ The protein-level performances of the PSSM model are shown in the table below:
 \end{center} 
 
 \begin{center}
-    \includegraphics[scale=0.5]{img/pssm_protein_level_eval.png}
+    \includegraphics[scale=0.4]{img/pssm_protein_level_eval.png}
 \end{center}
 
 The PSSM model has a relatively high number of true negatives (TN: 570,676) and a moderate number of true positives (TP: 34), suggesting that the model is very good at identifying non-members of the family (true negatives) but not as strong at identifying actual members (true positives). The false negatives (FN: 116) are significantly higher than the false positives (FP: 4), indicating that the model tends to miss more actual family members than it incorrectly identifies as family members.
@@ -119,7 +122,6 @@ The PSSM model has a relatively high number of true negatives (TN: 570,676) and 
 \subsubsection{PSSM Residue-Level Performance Evaluation}
 
 The residue-level performances of the PSSM model are shown in the table below:
-
 
 
 \begin{center}
@@ -146,15 +148,30 @@ we visualized the overlaps between PFAM domain predictions and actual annotated 
 \subsubsection{HMM Performance Evaluation}
 
 \begin{center}
+    \begin{tabular}{ccc}
+        \toprule
+        Metric & Value \\
+        \midrule
+        Precision & 0.989 \\
+        Recall & 0.974
+        F1-Score & 0.982 \\
+        Balanced Accuracy & 0.987 \\
+        MCC & 0.982 \\
+        \bottomrule
+    \end{tabular}
+\end{center} 
+
+\begin{center}
     \includegraphics[scale=0.4]{img/hmm_eval.png}
 \end{center}
 
-It is worth noting that the HMM model's performance is robust with respect to the starting alignment. (metrics here).\\
+It is worth noting that the HMM model's performance is robust with respect to the starting alignment. (but are our models comparable with the corresponding Pfam?).\\
 
-\subsection{Model Refinement}
+\subsection{Taxonomy}
 
+\subsection{Functional Enrichment (GO Annotation)}
 
-
+\subsection{Motifs}
 
 
 
