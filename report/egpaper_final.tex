@@ -53,7 +53,7 @@ Claudio Palmeri \\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, the project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching. (Include findings in the abstract)
+    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, this project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching. (Include findings in the abstract)
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
@@ -63,7 +63,9 @@ Claudio Palmeri \\
 
 In molecular biology, a protein domain represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
 
-\subsection{Pyridoxamine Kinase (CHECK FOR ERRORS)}
+\subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase(CHECK FOR ERRORS)}
+
+I'd need to check if that's factually correct. Check PdxK and ThiD
 
 Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
 
@@ -83,28 +85,21 @@ This project aims to build a sequence model and provide a comprehensive function
 
 \subsection{Model Building}
 
-Firstly, we investigated the target family to model,having Pfam domain \texttt{PF08543}, and verified that the provided representative \texttt{A0A0J9X285} protein sequence is indeed characteristic of the protein family. 
+Firstly, we investigated the target family to model - Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase - and verified that the provided representative \texttt{A0A0J9X285} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
 This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
 
-The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texttt{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. This FASTA was then submitted to \textit{NCBI} (hosted clustal from JalView to return our MSA. ???)
+The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequences using \textit{Clustal Omega}.
 
-The query sequence overlapped the primary conserved regions of the MSA, and the majority of positions outside of the query had very low occupancy, consisting of sequences that were unusually long. The query bounds for the MSA are observed to be reasonable bounds to trim the MSA, so poistions outside this range were trimmed from it.
+The query sequence overlapped the primary conserved regions of the MSA, and the majority of positions outside of the query had very low occupancy, consisting of sequences that were unusually long. The query bounds for the MSA are observed to be reasonable bounds to trim the MSA, so positions outside this range were trimmed from it. \\
 
-Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukariotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded.
+Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukariotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded. \\
 
-The MSA was finalized by removing the query sequence, and it was then processed to generate a Position-Specific Scoring Matrix (\texttt{PSSM}) using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the HMM was build using the \texttt{hmmer hmmbuild} command.
-
-%Firstly, we queried \textit{UniProt} to retrieve homologous proteins. The search returns 150 proteins, considering only SwissProt entries. We then generated a Multiple Sequence Alignment (MSA) starting from the retrieved hits using Clustal Omega.
-%(Edited MSA with Jalview?)
-%A Position-Specific Scoring Matrix (PSSM) was obtained by submitting a query to the \texttt{PSI-BLAST} tool, with the SwissProt database as the reference, and an HMM model was built starting from the MSA. (check this)
-
+The MSA was finalized by removing the query sequence, and it was then processed to generate a \textit{Position-Specific Scoring Matrix (PSSM)} using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the HMM was build using the \texttt{hmmer hmmbuild} command.
 
 \subsection{Model Evaluation}
 
-Using \texttt{hmmsearch}, and starting from the \texttt{PSI-BLAST} hits, we generated the predictions, extracting the list of alignments from the HMM search results, in order to understand the sequence alignments that relate to the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family.
-After defining our ground truth by finding all proteins in \textit{SwissProt} with the \texttt{PF08543} domain, we proceeded to evaluating the PSSM model.
-
-
+The PSSM predictions were generated through PSI-BLAST searches against the SwissProt database.
+Parallelly, HMM searches were conducted, the results of which were parsed to extract alignments between the HMM and sequences in the SwissProt database.
 
 \subsubsection{PSSM Protein-Level Performance Evaluation}
 
@@ -196,11 +191,11 @@ The residue-level performances of the HMM model are shown in the table below:
     \includegraphics[scale=0.45]{report/img/hmm_res_performance.png}
 \end{center}
 
-It is worth noting that the HMM model's performance is robust with respect to the starting alignment. (but are our models comparable with the corresponding Pfam?).\\
+As indicated by the confusion matrix, the HMM predictions match the target PFAM family very closely.
 
 \subsection{Taxonomy}
 
-To construct the taxonomic tree, we assembled the lineage data derived from the SwissProt database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data.
+To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli).
 
 The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
@@ -212,13 +207,42 @@ The taxonomic tree is shown below. In order to view it in full resolution, we re
 
 We performed Functional Enrichment Analysis using \textit{Gene Ontology} (GO) annotations by extracting the \textit{molecular function}, \textit{cellular component}, and \textit{biological process} data.
 
-%\subsubsection{Collecting GO Annotations}
-
 In order to visualize which GO Terms are characteristic of our family, we can plot the enrichment (probability) of observing a GO Term over both our model family and the totality of \textit{SwissProt}. Selecting the terms with the highest odds, or the ratio of probability that the term is observed in the family and all of \textit{SwissProt} gives us clues about which terms are most characteristic. 
 
 \begin{center}
     \includegraphics[scale=0.4]{report/img/go_term_enrichment.png}
 \end{center}
+
+\begin{center}
+    \begin{tabular}{lcc}
+        \toprule
+        GO Term ID & Term Name & Odds \\
+        \midrule
+        GO:0042817	& \small{pyridoxal metabolic process} &	3805.53 \\
+        GO:0008478	& \small{pyridoxal kinase activity} &	3773.28 \\
+        GO:0009443	& \small{pyridoxal 5'-phosphate salvage} &	3642.90 \\
+        GO:0008972	& \small{phosphomethylpyrim. kin. act.} &	3615.25 \\
+        GO:0008902	& \small{hydroxymethylpyrim. kin. act.} &	3605.24 \\
+        GO:0009230	& \small{thiamine catabolic process} &	1902.76 \\
+        GO:0042818	& \small{pyridoxamine metabolic process} &	1427.07\\
+        GO:0042816	& \small{vitamin B6 metabolic process} &	1268.51\\
+        GO:0010054	& \small{trichoblast differentiation} &	1268.51 \\
+        GO:0036172	& \small{thiamine salvage} &	1087.29 \\
+        GO:0042822	& \small{pyridoxal phosphate metab. proc.} &	951.38 \\
+        GO:0070280	& \small{pyridoxal binding} &	845.67 \\
+        GO:0031403	& \small{lithium ion binding} &	634.25 \\
+        GO:0042819	& \small{vitamin B6 biosynthetic proc.} &	543.64 \\
+        GO:0050334	& \small{thiaminase activity} &	456.66 \\
+        GO:0097159	& \small{organic cyclic compound binding} &	200.29 \\
+        GO:0008614	& \small{pyridoxine metabolic process} &	131.22 \\
+        \bottomrule
+    \end{tabular}
+\end{center} 
+\begin{center}
+    \small{Most characteristic GO Terms}
+\end{center}
+
+
 
 By using Fisher's Exact Test, we realized that the p-value is extremely close to zero (maybe add p=...) for terms with high odds, indicating that they are indeed characteristic of our family. However, as a consequence of how sparse GO Labels are for a sequence, when compared (to the abundance of our limited amout of terms (56) present in our family. ?? -> check this).
 
@@ -245,6 +269,23 @@ Most enriched branches:\\
 
 \subsection{Motifs}
 
+Motifs are short protein sequences that are often repeated across the genome. These motifs usually coordinates protein-to-protein interaction and are found in the disordered regions. 
+
+Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal 2 datasets: ELM and ProSite.
+
+For each member of the family we checked if the regular expressions found in the aforementioned 2 datasets were sub-sequences of it and counted how many times they appeared. We can use this to find the most common motifs among the entire protein family.
+
+We can then plot the sequences alignment and highlight where a single motif appear to get a visual representation of how frequent it is. This when applied to the most commonly found motifs yields the following:
+
+\begin{center}
+    \includegraphics[scale=1]{report/img/Elm.png} \\
+    \small{Most common ELM linear motif}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=1]{report/img/prosite.png} \\
+    \small{Most common ProSite linear motif}
+\end{center}
 
 \section{Results}
 
