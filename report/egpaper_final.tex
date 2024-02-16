@@ -83,9 +83,20 @@ This project aims to build a sequence model and provide a comprehensive function
 
 \subsection{Model Building}
 
-Firstly, we queried \textit{UniProt} to retrieve homologous proteins starting from the \texttt{A0A0J9X285} protein, having Pfam domain \texttt{PF08543}. The search returns 150 proteins, considering only SwissProt entries. We then generated a Multiple Sequence Alignment (MSA) starting from the retrieved hits using Clustal Omega.
-(Edited MSA with Jalview?)
-A Position-Specific Scoring Matrix (PSSM) was obtained by submitting a query to the \texttt{PSI-BLAST} tool, with the SwissProt database as the reference, and an HMM model was built starting from the MSA. (check this)
+Firstly, we investigated the target family to model,having Pfam domain \texttt{PF08543}, and verified that the provided representative \texttt{A0A0J9X285} protein sequence is indeed characteristic of the protein family. 
+This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
+
+The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texttt{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. This FASTA was then submitted to \textit{NCBI} (hosted clustal from JalView to return our MSA. ???)
+
+The query sequence overlapped the primary conserved regions of the MSA, and the majority of positions outside of the query had very low occupancy, consisting of sequences that were unusually long. The query bounds for the MSA are observed to be reasonable bounds to trim the MSA, so poistions outside this range were trimmed from it.
+
+Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukariotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded.
+
+The MSA was finalized by removing the query sequence, and it was then processed to generate a Position-Specific Scoring Matrix (\texttt{PSSM}) using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the HMM was build using the \texttt{hmmer hmmbuild} command.
+
+%Firstly, we queried \textit{UniProt} to retrieve homologous proteins. The search returns 150 proteins, considering only SwissProt entries. We then generated a Multiple Sequence Alignment (MSA) starting from the retrieved hits using Clustal Omega.
+%(Edited MSA with Jalview?)
+%A Position-Specific Scoring Matrix (PSSM) was obtained by submitting a query to the \texttt{PSI-BLAST} tool, with the SwissProt database as the reference, and an HMM model was built starting from the MSA. (check this)
 
 
 \subsection{Model Evaluation}
@@ -114,10 +125,8 @@ The protein-level performances of the PSSM model are shown in the table below:
 \end{center} 
 
 \begin{center}
-    \includegraphics[scale=0.4]{img/pssm_protein_level_eval.png}
+    \includegraphics[scale=0.45]{report/img/pssm_prot_performance.png}
 \end{center}
-
-The PSSM model has a relatively high number of true negatives (TN: 570,676) and a moderate number of true positives (TP: 34), suggesting that the model is very good at identifying non-members of the family (true negatives) but not as strong at identifying actual members (true positives). The false negatives (FN: 116) are significantly higher than the false positives (FP: 4), indicating that the model tends to miss more actual family members than it incorrectly identifies as family members.
 
 \subsubsection{PSSM Residue-Level Performance Evaluation}
 
@@ -130,7 +139,7 @@ The residue-level performances of the PSSM model are shown in the table below:
         Metric & Value \\
         \midrule
         Precision & 0.91 \\
-        Recall & 0.28
+        Recall & 0.28 \\
         F1-Score & 0.429 \\
         Balanced Accuracy & 0.64 \\
         MCC & 0.505 \\
@@ -139,13 +148,35 @@ The residue-level performances of the PSSM model are shown in the table below:
 \end{center} 
 
 \begin{center}
-    \includegraphics[scale=0.4]{img/pssm_residue_level_eval.png}
+    \includegraphics[scale=0.45]{report/img/pssm_res_performance.png}
 \end{center}
 
-To assess the performance of the PSSM model at a detailed, residue-level granularity,
-we visualized the overlaps between PFAM domain predictions and actual annotated domains from a database (?). In the plot, each row represents a protein and each column a residue position, color-coded by the prediction accuracy. 
+\subsubsection{HMM Protein-Level Performance Evaluation}
 
-\subsubsection{HMM Performance Evaluation}
+
+The protein-level performances of the HMM model are shown in the table below:
+
+\begin{center}
+    \begin{tabular}{ccc}
+        \toprule
+        Metric & Value \\
+        \midrule
+        Precision & 0.993 \\
+        Recall & 0.993 \\
+        F1-Score & 0.993 \\
+        Balanced Accuracy & 0.996 \\
+        MCC & 0.993 \\
+        \bottomrule
+    \end{tabular}
+\end{center} 
+
+\begin{center}
+    \includegraphics[scale=0.45]{report/img/hmm_prot_performance.png}
+\end{center}
+
+\subsubsection{HMM Residue-Level Performance Evaluation}
+
+The residue-level performances of the HMM model are shown in the table below:
 
 \begin{center}
     \begin{tabular}{ccc}
@@ -153,7 +184,7 @@ we visualized the overlaps between PFAM domain predictions and actual annotated 
         Metric & Value \\
         \midrule
         Precision & 0.989 \\
-        Recall & 0.974
+        Recall & 0.974 \\
         F1-Score & 0.982 \\
         Balanced Accuracy & 0.987 \\
         MCC & 0.982 \\
@@ -162,17 +193,57 @@ we visualized the overlaps between PFAM domain predictions and actual annotated 
 \end{center} 
 
 \begin{center}
-    \includegraphics[scale=0.4]{img/hmm_eval.png}
+    \includegraphics[scale=0.45]{report/img/hmm_res_performance.png}
 \end{center}
 
 It is worth noting that the HMM model's performance is robust with respect to the starting alignment. (but are our models comparable with the corresponding Pfam?).\\
 
 \subsection{Taxonomy}
 
-\subsection{Functional Enrichment (GO Annotation)}
+To construct the taxonomic tree, we assembled the lineage data derived from the SwissProt database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data.
+
+The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
+
+\begin{center}
+    \includegraphics[scale=0.4]{report/img/taxonomy_tree.png}
+\end{center}
+
+\subsection{Functional Enrichment with Gene Ontology Annotation}
+
+We performed Functional Enrichment Analysis using \textit{Gene Ontology} (GO) annotations by extracting the \textit{molecular function}, \textit{cellular component}, and \textit{biological process} data.
+
+%\subsubsection{Collecting GO Annotations}
+
+In order to visualize which GO Terms are characteristic of our family, we can plot the enrichment (probability) of observing a GO Term over both our model family and the totality of \textit{SwissProt}. Selecting the terms with the highest odds, or the ratio of probability that the term is observed in the family and all of \textit{SwissProt} gives us clues about which terms are most characteristic. 
+
+\begin{center}
+    \includegraphics[scale=0.4]{report/img/go_term_enrichment.png}
+\end{center}
+
+By using Fisher's Exact Test, we realized that the p-value is extremely close to zero (maybe add p=...) for terms with high odds, indicating that they are indeed characteristic of our family. However, as a consequence of how sparse GO Labels are for a sequence, when compared (to the abundance of our limited amout of terms (56) present in our family. ?? -> check this).
+
+Below, we plot a word cloud of the Enriched Terms for each aspect:
+
+\begin{center}
+    \includegraphics[scale=0.35]{report/img/word_cloud_mf.png} \\
+    \small{Molecular Function Terms}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=0.35]{report/img/word_cloud_cc.png} \\
+    \small{Cellular Component Terms}
+\end{center}
+
+\begin{center}
+    \includegraphics[scale=0.35]{report/img/word_cloud_bp.png} \\
+    \small{Biological Process Terms}
+\end{center} \\
+
+Most enriched branches:\\
+
+
 
 \subsection{Motifs}
-
 
 
 \section{Results}
