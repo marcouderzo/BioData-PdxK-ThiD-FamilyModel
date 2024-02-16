@@ -53,7 +53,7 @@ Claudio Palmeri \\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, this project delves into the functional and structural properties of the domain family, involving taxonomic lineage analysis, Gene Ontology (GO) annotations assessment, and motif searching. (Include findings in the abstract)
+    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, we delved into the functional and structural properties of the domain family, analyzing the taxonomic lineage, assessing Gene Ontology (GO) annotations for functional enrichment, and searching for significantly conserved short motifs inside the family. (Include findings in the abstract)
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
@@ -61,18 +61,16 @@ Claudio Palmeri \\
 
 \subsection{Protein Domains}
 
-In molecular biology, a protein domain represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
+A protein domain represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
 
-\subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase(CHECK FOR ERRORS)}
-
-I'd need to check if that's factually correct. Check PdxK and ThiD
+\subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase}
 
 Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
 
 \begin{itemize}
 \item \textbf{Pyridoxamine Kinase}: This enzyme is involved in the vitamin B6 metabolism pathway. Vitamin B6 exists in different forms, including pyridoxamine, pyridoxal, and pyridoxine. Pyridoxamine kinase specifically catalyzes the phosphorylation of pyridoxamine, converting it into pyridoxamine 5'-phosphate. This is an important step in the salvage pathway of vitamin B6, which is crucial for its recycling and maintenance within the cell.
 
-\item \textbf{Phosphomethylpyrimidine Kinase}: This enzyme is a part of the thiamine (vitamin B1) biosynthetic pathway. It catalyzes the phosphorylation of hydroxymethylpyrimidine (HMP) to hydroxymethylpyrimidine phosphate. This step is essential in the synthesis of thiamine pyrophosphate (TPP), an active form of vitamin B1. TPP is a vital coenzyme in several enzymatic reactions, particularly those involved in carbohydrate metabolism.
+\item \textbf{Phosphomethylpyrimidine Kinase}: This enzyme plays a role in the biosynthesis of thiamine (vitamin B1), which is essential for numerous cellular functions, particularly in carbohydrate metabolism.
 \end{itemize}
 
 Both these enzymes, due to their roles in vitamin metabolism, are crucial for maintaining cellular health and function. Disruptions in these pathways can lead to vitamin deficiencies, affecting numerous biological processes.
@@ -106,7 +104,7 @@ Parallelly, HMM searches were conducted, the results of which were parsed to ext
 The protein-level performances of the PSSM model are shown in the table below:
 
 \begin{center}
-    \begin{tabular}{ccc}
+    \begin{tabular}{lc}
         \toprule
         Metric & Value \\
         \midrule
@@ -129,7 +127,7 @@ The residue-level performances of the PSSM model are shown in the table below:
 
 
 \begin{center}
-    \begin{tabular}{ccc}
+    \begin{tabular}{lc}
         \toprule
         Metric & Value \\
         \midrule
@@ -152,7 +150,7 @@ The residue-level performances of the PSSM model are shown in the table below:
 The protein-level performances of the HMM model are shown in the table below:
 
 \begin{center}
-    \begin{tabular}{ccc}
+    \begin{tabular}{lc}
         \toprule
         Metric & Value \\
         \midrule
@@ -174,7 +172,7 @@ The protein-level performances of the HMM model are shown in the table below:
 The residue-level performances of the HMM model are shown in the table below:
 
 \begin{center}
-    \begin{tabular}{ccc}
+    \begin{tabular}{lc}
         \toprule
         Metric & Value \\
         \midrule
@@ -197,7 +195,7 @@ As indicated by the confusion matrix, the HMM predictions match the target PFAM 
 
 To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli).
 
-The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
+The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
     \includegraphics[scale=0.4]{report/img/taxonomy_tree.png}
@@ -268,24 +266,41 @@ Most enriched branches:\\
 
 
 \subsection{Motifs}
-
 Motifs are short protein sequences that are often repeated across the genome. These motifs usually coordinates protein-to-protein interaction and are found in the disordered regions. 
 
 Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal 2 datasets: ELM and ProSite.
 
-For each member of the family we checked if the regular expressions found in the aforementioned 2 datasets were sub-sequences of it and counted how many times they appeared. We can use this to find the most common motifs among the entire protein family.
+For each member of the family we checked if the regular expressions found in the aforementioned 2 datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions (which can be found with the MobiDB-lite database). This is due to the fact that our protein family is constituted by globular proteins.
 
-We can then plot the sequences alignment and highlight where a single motif appear to get a visual representation of how frequent it is. This when applied to the most commonly found motifs yields the following:
+Given a motif, the regions where its pattern matches our proteins are overlayed onto multiple sequence alignments. These patterns are then visually inspected to determine the significance of pattern in the family.
+Some patterns are overly general, matching many regions and are labeled as having a high probability of being observed in any given protein sequence from our family. (Example is the first plot)
+
+Conservation of a pattern in the same position is indicative of functional significance.
+
+\subsubsection{ELM}
+
+There were 18 significant hits in this database
+(Add the function of both of these motifs)
 
 \begin{center}
     \includegraphics[scale=1]{report/img/Elm.png} \\
-    \small{Most common ELM linear motif}
+    \small{Most common Elm motifs in our family}
 \end{center}
+
+% \begin{center}
+    % \includegraphics[scale=0.4]{report/img/Elm2.png} \\
+    % \small{10nth to 18nth most common ELM linear motifs}
+% \end{center}
+
+\subsubsection{ProSite}
+
+There were 4 significant hits in this database:
 
 \begin{center}
     \includegraphics[scale=1]{report/img/prosite.png} \\
-    \small{Most common ProSite linear motif}
+    \small{Most common ProSite motif in our family}
 \end{center}
+
 
 \section{Results}
 
@@ -308,4 +323,33 @@ editors of referenced books.
 %\bibliography{egbib}
 %}
 
+\clearpage % Start a new page
+\onecolumn % Switch to one-column layout
+
+\section{Appendix}
+
+
+\subsection{Taxonomic Tree}
+\label{sec:taxtree}
+
+Below, we plot the full-resolution Taxonomic Tree. \\
+\begin{center}
+    \includegraphics[]{report/img/taxonomy_tree.png}
+\end{center}
+
+\subsection{ELM}
+\begin{center}
+    \includegraphics[scale=0.4]{report/img/Elm1.png} \\
+    \small{Top 9 most common ELM linear motifs}
+\end{center}
+\begin{center}
+    \includegraphics[scale=0.4]{report/img/Elm2.png} \\
+    \small{10nth to 18nth most common ELM linear motifs}
+\end{center}
+
+\subsection{ProSite}
+\begin{center}
+    \includegraphics[scale=0.4]{report/img/Prosite.png} \\
+    \small{Most common 4 ProSite linear motifs}
+\end{center}
 \end{document}
