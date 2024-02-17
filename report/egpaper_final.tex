@@ -61,29 +61,29 @@ Claudio Palmeri \\
 
 \subsection{Protein Domains}
 
-A protein domain represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
+A \textit{protein domain} represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
 
 \subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase}
 
-Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
+\textit{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase} family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
 
 \begin{itemize}
-\item \textbf{Pyridoxamine Kinase}: This enzyme is involved in the vitamin B6 metabolism pathway. Vitamin B6 exists in different forms, including pyridoxamine, pyridoxal, and pyridoxine. Pyridoxamine kinase specifically catalyzes the phosphorylation of pyridoxamine, converting it into pyridoxamine 5'-phosphate. This is an important step in the salvage pathway of vitamin B6, which is crucial for its recycling and maintenance within the cell.
+\item \textit{Pyridoxamine Kinase}: This enzyme is involved in the vitamin B6 metabolism pathway. Vitamin B6 exists in different forms, including pyridoxamine, pyridoxal, and pyridoxine. Pyridoxamine kinase specifically catalyzes the phosphorylation of pyridoxamine, converting it into pyridoxamine 5'-phosphate. This is an important step in the salvage pathway of vitamin B6, which is crucial for its recycling and maintenance within the cell.
 
-\item \textbf{Phosphomethylpyrimidine Kinase}: This enzyme plays a role in the biosynthesis of thiamine (vitamin B1), which is essential for numerous cellular functions, particularly in carbohydrate metabolism.
+\item \textit{Phosphomethylpyrimidine Kinase}: This enzyme plays a role in the biosynthesis of thiamine (vitamin B1), which is essential for numerous cellular functions, particularly in carbohydrate metabolism.
 \end{itemize}
 
 Both these enzymes, due to their roles in vitamin metabolism, are crucial for maintaining cellular health and function. Disruptions in these pathways can lead to vitamin deficiencies, affecting numerous biological processes.
 
 \subsection{Objective of the Study}
 
-This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. (Write a small preamble of the goals of this project, even if it is similar to what is written in the abstract).
+In this project, our primary objective is to construct and refine a sequence model for the \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} domain family, and to characterize its functional aspects. To ensure the reliability and accuracy of our models, we are aligning and comparing them against the established Pfam annotations within the \textit{SwissProt} database. We then delve into the domain family's functional and structural attributes. This includes a detailed analysis of their taxonomic lineage, providing insights into their evolutionary history and biological diversity. Additionally, we are assessing the Gene Ontology (GO) annotations. This process is crucial for identifying functional enrichment within the family and understanding the broader biological roles these domains play. Furthermore, we are focused on detecting and analyzing significantly conserved short motifs. The identification of these motifs is essential as they often play critical roles in the domain's functional properties and interactions within the cell.
 
-\section{Methods and Results}
+\section{Domain Model Definition}
 
 \subsection{Model Building}
 
-Firstly, we investigated the target family to model - Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase - and verified that the provided representative \texttt{A0A0J9X285} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
+Firstly, we investigated the target family to model - \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} - and verified that the provided representative \texttt{A0A0J9X285} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
 This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
 
 The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequences using \textit{Clustal Omega}.
@@ -115,10 +115,15 @@ The protein-level performances of the PSSM model are shown in the table below:
         MCC & 0.45 \\
         \bottomrule
     \end{tabular}
-\end{center} 
+\end{center} \\ 
+
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/pssm_prot_performance.png}
+\end{center}
+
+\begin{center}
+    \small{Confusion Matrix for PSSM at protein-level}
 \end{center}
 
 \subsubsection{PSSM Residue-Level Performance Evaluation}
@@ -138,10 +143,14 @@ The residue-level performances of the PSSM model are shown in the table below:
         MCC & 0.505 \\
         \bottomrule
     \end{tabular}
-\end{center} 
+\end{center} \\
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/pssm_res_performance.png}
+\end{center}
+
+\begin{center}
+    \small{Confusion Matrix for PSSM at residue-level}
 \end{center}
 
 \subsubsection{HMM Protein-Level Performance Evaluation}
@@ -161,10 +170,14 @@ The protein-level performances of the HMM model are shown in the table below:
         MCC & 0.993 \\
         \bottomrule
     \end{tabular}
-\end{center} 
+\end{center} \\
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/hmm_prot_performance.png}
+\end{center}
+
+\begin{center}
+    \small{Confusion Matrix for HMM at protein-level}
 \end{center}
 
 \subsubsection{HMM Residue-Level Performance Evaluation}
@@ -183,13 +196,19 @@ The residue-level performances of the HMM model are shown in the table below:
         MCC & 0.982 \\
         \bottomrule
     \end{tabular}
-\end{center} 
+\end{center} \\
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/hmm_res_performance.png}
 \end{center}
 
+\begin{center}
+    \small{Confusion Matrix for HMM at residue-level}
+\end{center}
+
 As indicated by the confusion matrix, the HMM predictions match the target PFAM family very closely.
+
+\section{Domain Family Characterization}
 
 \subsection{Taxonomy}
 
@@ -198,7 +217,7 @@ To construct the taxonomic tree, we assembled the lineage data derived from the 
 The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
-    \includegraphics[scale=0.4]{report/img/taxonomy_tree.png}
+    \includegraphics[scale=0.45]{report/img/taxonomy_tree.png}
 \end{center}
 
 \subsection{Functional Enrichment with Gene Ontology Annotation}
@@ -247,21 +266,46 @@ By using Fisher's Exact Test, we realized that the p-value is extremely close to
 Below, we plot a word cloud of the Enriched Terms for each aspect:
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_mf.png} \\
+    \includegraphics[scale=0.35]{report/img/word_cloud_mf.png} 
+    \
     \small{Molecular Function Terms}
 \end{center}
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_cc.png} \\
+    \includegraphics[scale=0.35]{report/img/word_cloud_cc.png} 
+    \
     \small{Cellular Component Terms}
 \end{center}
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_bp.png} \\
+    \includegraphics[scale=0.35]{report/img/word_cloud_bp.png} 
+    \
     \small{Biological Process Terms}
 \end{center} \\
 
-Most enriched branches:\\
+We then explored the hierarchical structure of the Gene Ontology to discern the most significantly enriched branches relevant to our protein family. High-level terms in Gene Ontology, typically positioned at the top of the hierarchy, encapsulate the broadest categories, covering a diverse range of specific functions, processes, or components. These general terms are less detailed compared to low-level terms, but are instrumental in offering an overarching view of the primary biological functions, processes, or components linked with a set of genes or proteins. 
+Utilizing the GO hierarchy, each GO Term was classified according to its level of specificity. We focused on high-level terms, filtering the GO terms based on their hierarchical level. This approach enabled us to identify the most enriched branches at a more generalized level, revealing key biological processes, molecular functions, and cellular components prominently involved in our protein family. We report them in the table below:
+
+\begin{center}
+    \begin{tabular}{lccc}
+        \toprule
+        GO Term ID & Term Name & Dom. & Prob. \\
+        \midrule
+        GO:0005829	& \small{cytosol} & cc & 0.253 \\
+        GO:0005576	& \small{extracell. region} & cc & 0.013 \\
+        GO:0005654	& \small{nucleoplasm} &	cc & 0.013 \\
+        GO:0097159	& \small{org. cyc. comp. binding} & mf	& 0.013 \\
+        GO:0036094	& \small{small molecule binding} & mf & 0.013 \\
+        \bottomrule
+    \end{tabular}
+\end{center} 
+\begin{center}
+    \small{Table x.x: Most enriched branches}\\
+    \small{cc: cellular component; \\
+            mf: molecular function; \\
+            bp: biological process.}\\
+    
+\end{center}
 
 
 
@@ -301,10 +345,7 @@ There were 4 significant hits in this database:
     \small{Most common ProSite motif in our family}
 \end{center}
 
-
-\section{Results}
-
-\section{Discussion}
+\section{Conclusion}
 
 
 
