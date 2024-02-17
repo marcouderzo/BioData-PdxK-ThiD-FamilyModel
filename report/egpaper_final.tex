@@ -212,9 +212,9 @@ As indicated by the confusion matrix, the HMM predictions match the target PFAM 
 
 \subsection{Taxonomy}
 
-To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli).
+To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli). \\
 
-The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
+The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section 6.1} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/taxonomy_tree.png}
@@ -266,24 +266,27 @@ By using Fisher's Exact Test, we realized that the p-value is extremely close to
 Below, we plot a word cloud of the Enriched Terms for each aspect:
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_mf.png} 
+    \includegraphics[scale=0.30]{report/img/word_cloud_mf.png} \\
     \
-    \small{Molecular Function Terms}
+    \small{Enriched terms for aspect: Molecular Function}
 \end{center}
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_cc.png} 
+    \includegraphics[scale=0.30]{report/img/word_cloud_cc.png} \\
     \
-    \small{Cellular Component Terms}
+    \small{Enriched terms for aspect: Cellular Component}
 \end{center}
 
 \begin{center}
-    \includegraphics[scale=0.35]{report/img/word_cloud_bp.png} 
+    \includegraphics[scale=0.30]{report/img/word_cloud_bp.png} \\
     \
-    \small{Biological Process Terms}
+    \small{Enriched terms for aspect: Biological Process}
 \end{center} \\
 
-We then explored the hierarchical structure of the Gene Ontology to discern the most significantly enriched branches relevant to our protein family. High-level terms in Gene Ontology, typically positioned at the top of the hierarchy, encapsulate the broadest categories, covering a diverse range of specific functions, processes, or components. These general terms are less detailed compared to low-level terms, but are instrumental in offering an overarching view of the primary biological functions, processes, or components linked with a set of genes or proteins. 
+We then explored the hierarchical structure of the Gene Ontology to discern the most significantly enriched branches relevant to our protein family. \\
+
+High-level terms in Gene Ontology, typically positioned at the top of the hierarchy, encapsulate the broadest categories, covering a diverse range of specific functions, processes, or components. These general terms are less detailed compared to low-level terms, but are instrumental in offering an overarching view of the primary biological functions, processes, or components linked with a set of genes or proteins. \\
+
 Utilizing the GO hierarchy, each GO Term was classified according to its level of specificity. We focused on high-level terms, filtering the GO terms based on their hierarchical level. This approach enabled us to identify the most enriched branches at a more generalized level, revealing key biological processes, molecular functions, and cellular components prominently involved in our protein family. We report them in the table below:
 
 \begin{center}
@@ -312,24 +315,39 @@ Utilizing the GO hierarchy, each GO Term was classified according to its level o
 \subsection{Motifs}
 Motifs are short protein sequences that are often repeated across the genome. These motifs usually coordinates protein-to-protein interaction and are found in the disordered regions. 
 
-Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal 2 datasets: ELM and ProSite.
+Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal two datasets: ELM and ProSite.
 
-For each member of the family we checked if the regular expressions found in the aforementioned 2 datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions (which can be found with the MobiDB-lite database). This is due to the fact that our protein family is constituted by globular proteins.
+For each member of the family we checked if the regular expressions found in the aforementioned two datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions (which can be found with the MobiDB-lite database). This is due to the fact that our protein family is constituted by globular proteins.
 
-Given a motif, the regions where its pattern matches our proteins are overlayed onto multiple sequence alignments. These patterns are then visually inspected to determine the significance of pattern in the family.
+Given a motif, the regions where its pattern matches our proteins are overlayed onto Multiple Sequence Alignments. These patterns are then visually inspected to determine the significance of pattern in the family.
 Some patterns are overly general, matching many regions and are labeled as having a high probability of being observed in any given protein sequence from our family. (Example is the first plot)
 
 Conservation of a pattern in the same position is indicative of functional significance.
 
 \subsubsection{ELM}
 
-There were 18 significant hits in this database
-(Add the function of both of these motifs)
+There were 18 significant hits in this database. Below, we present the most common one.
 
 \begin{center}
-    \includegraphics[scale=1]{report/img/Elm.png} \\
-    \small{Most common Elm motifs in our family}
+    \includegraphics[scale=1.17]{report/img/Elm.png} \\
+    \small{Most common Elm motif in our family}
 \end{center}
+
+%The WD40 repeat domain protein WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex.
+%(this is copied from a section of \href{http://elm.eu.org/elms/LIG_WD40_WDR5_VDV_1.html}{LIG_WD40_WDR5_VDV_1.html}, not really sure how to describe it with my own words) TO FIX: WRONG LINK
+
+The WD40 repeat is a short structural motif, approximately 40 amino acids in length, often terminating in a tryptophan-aspartic acid (W-D) dipeptide. Proteins that contain WD40 repeats are known as WD-repeat proteins. These repeats are typically involved in protein-protein interactions and can form a beta-propeller structure. Each repeat forms a blade of the propeller, with typically 4 to 8 repeats coming together to form a circular propeller-like structure.
+WDR5 is a protein containing WD40 repeats, which form a beta-propeller structure, crucial for protein-protein interactions. It plays a pivotal role in the regulation of gene transcription, cell cycle progression, and DNA repair through its involvement in post-translational modifications of histones. Specifically, WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex. The WDR5-binding motif, as described by the ELM database (accession \texttt{ELME000365}), is a functional site that interacts with WDR5 between blades 5 and 6 of the WD40 repeat. The WDR5-binding motif is conserved across various species, indicating its importance in biological processes. \\
+
+Plots for the other 17 motifs can be found in the appendix \hyperref[sec:elm_motifs]{section 6.2}. \\
+
+Other common motifs found are:
+
+\begin{itemize}
+\item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site, where         Glycosaminoglycan are long, linear polysaccharides consisting of repeating      disaccharide units.
+\item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligands, where the FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins.
+\item \textit{CLV\_PC5K\_5KI1\_1}: A PCSK cleavage site, where PCSK plays a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
+\end{itemize}
 
 % \begin{center}
     % \includegraphics[scale=0.4]{report/img/Elm2.png} \\
@@ -344,6 +362,15 @@ There were 4 significant hits in this database:
     \includegraphics[scale=1]{report/img/prosite.png} \\
     \small{Most common ProSite motif in our family}
 \end{center}
+
+The other 3 hits were: 
+\begin{itemize}
+\item \textit{PS00001}: A N-glycosylation site
+\item \textit{PS00005}: A protein kinase C phosphorylation site
+\item \textit{PS00006} A casein kinase II phophorylation site
+\end{itemize}
+
+
 
 \section{Conclusion}
 
@@ -379,18 +406,19 @@ Below, we plot the full-resolution Taxonomic Tree. \\
 \end{center}
 
 \subsection{ELM}
+\label{sec:elm_motifs}
 \begin{center}
-    \includegraphics[scale=0.4]{report/img/Elm1.png} \\
+    \includegraphics[scale=0.8]{report/img/Elm1.png} \\
     \small{Top 9 most common ELM linear motifs}
 \end{center}
 \begin{center}
-    \includegraphics[scale=0.4]{report/img/Elm2.png} \\
+    \includegraphics[scale=0.8]{report/img/Elm2.png} \\
     \small{10nth to 18nth most common ELM linear motifs}
 \end{center}
 
 \subsection{ProSite}
 \begin{center}
-    \includegraphics[scale=0.4]{report/img/Prosite.png} \\
+    \includegraphics[scale=0.88]{report/img/Prosite.png} \\
     \small{Most common 4 ProSite linear motifs}
 \end{center}
 \end{document}
