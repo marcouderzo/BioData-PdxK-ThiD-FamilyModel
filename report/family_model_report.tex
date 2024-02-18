@@ -53,7 +53,7 @@ Claudio Palmeri \\
 
 %%%%%%%%% ABSTRACT
 \begin{abstract}
-    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, we delved into the functional and structural properties of the domain family, analyzing the taxonomic lineage, assessing Gene Ontology (GO) annotations for functional enrichment, and searching for significantly conserved short motifs inside the family. (Include findings in the abstract)
+    This project aims to build a sequence model and provide a comprehensive functional characterization of the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family. The models' accuracy is benchmarked against Pfam annotations in the SwissProt database. Furthermore, we delved into the functional and structural properties of the domain family, analyzing the taxonomic lineage, assessing Gene Ontology (GO) annotations for functional enrichment, and searching for significantly conserved short motifs inside the family. In particular, our investigation into conserved short motifs using ELM and ProSite databases identified several significant motifs, such as the WDR5 WD40 Repeat-binding ligand and the N-myristoylation site.
 \end{abstract}
 
 %%%%%%%%% BODY TEXT
@@ -92,7 +92,7 @@ The query sequence overlapped the primary conserved regions of the MSA, and the 
 
 Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukariotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded. \\
 
-The MSA was finalized by removing the query sequence, and it was then processed to generate a \textit{Position-Specific Scoring Matrix (PSSM)} using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the HMM was build using the \texttt{hmmer hmmbuild} command.
+The MSA was finalized by removing the query sequence, and it was then processed to generate a \textit{Position-Specific Scoring Matrix (PSSM)} using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the \textit{Hidden Markov Model (HMM)} was built using the \texttt{hmmer hmmbuild} command.
 
 \subsection{Model Evaluation}
 
@@ -116,6 +116,10 @@ The protein-level performances of the PSSM model are shown in the table below:
         \bottomrule
     \end{tabular}
 \end{center} \\ 
+
+\begin{center}
+    \small{Table 2.1: PSSM Evaluation at Protein-Level}
+\end{center}
 
 
 \begin{center}
@@ -146,6 +150,10 @@ The residue-level performances of the PSSM model are shown in the table below:
 \end{center} \\
 
 \begin{center}
+    \small{Table 2.2: PSSM Evaluation at Residue-Level}
+\end{center}
+
+\begin{center}
     \includegraphics[scale=0.45]{report/img/pssm_res_performance.png}
 \end{center}
 
@@ -173,6 +181,10 @@ The protein-level performances of the HMM model are shown in the table below:
 \end{center} \\
 
 \begin{center}
+    \small{Table 2.3: HMM Evaluation at Protein-Level}
+\end{center}
+
+\begin{center}
     \includegraphics[scale=0.45]{report/img/hmm_prot_performance.png}
 \end{center}
 
@@ -197,6 +209,10 @@ The residue-level performances of the HMM model are shown in the table below:
         \bottomrule
     \end{tabular}
 \end{center} \\
+
+\begin{center}
+    \small{Table 2.4: HMM Evaluation at Residue-Level}
+\end{center}
 
 \begin{center}
     \includegraphics[scale=0.45]{report/img/hmm_res_performance.png}
@@ -261,7 +277,7 @@ In order to visualize which GO Terms are characteristic of our family, we can pl
     \end{tabular}
 \end{center} 
 \begin{center}
-    \small{Fig 3.3: Most characteristic GO Terms}
+    \small{Table 3.1: Most characteristic GO Terms}
 \end{center}
 
 \subsubsection{Fisher's Exact Test}
@@ -277,19 +293,19 @@ Below, we plot a word cloud of the Enriched Terms for each aspect:
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_mf.png} \\
     \
-    \small{Fig 3.4: Enriched terms for aspect: Molecular Function}
+    \small{Fig 3.3: Enriched terms for aspect: Molecular Function}
 \end{center}
 
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_cc.png} \\
     \
-    \small{Fig 3.5: Enriched terms for aspect: Cellular Component}
+    \small{Fig 3.4: Enriched terms for aspect: Cellular Component}
 \end{center}
 
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_bp.png} \\
     \
-    \small{Fig 3.6: Enriched terms for aspect: Biological Process}
+    \small{Fig 3.5: Enriched terms for aspect: Biological Process}
 \end{center} \\
 
 We then explored the hierarchical structure of the Gene Ontology to discern the most significantly enriched branches relevant to our protein family. \\
@@ -312,7 +328,7 @@ Leveraging the GO hierarchy, each GO Term was classified according to its level 
     \end{tabular}
 \end{center} 
 \begin{center}
-    \small{Table x.x: Most enriched branches}\\
+    \small{Table 3.2: Most enriched branches}\\
     \small{cc: cellular component; mf: molecular function}\\
     
 \end{center}
@@ -395,7 +411,9 @@ The other 3 significant hits were:
 
 \section{Conclusion}
 
+In this project, we have successfully constructed a sequence model for the Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase domain family and provided a detailed functional characterization. Our model, benchmarked against Pfam annotations in the SwissProt database, demonstrated high accuracy in identifying the domain sequences. We analyzed the taxonomic lineage of the domain family, which provided insights into their evolutionary history and diversity. The assessment of Gene Ontology annotations revealed the functional enrichment within the family, highlighting their biological roles and processes.
 
+Additionally, our investigation into conserved short motifs using ELM and ProSite databases was a key aspect of the project. We identified several significant motifs, such as the WDR5 WD40 Repeat-binding ligand and the N-myristoylation site.
 
 
 %-------------------------------------------------------------------------
