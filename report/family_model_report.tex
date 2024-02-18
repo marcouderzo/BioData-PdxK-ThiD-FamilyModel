@@ -65,7 +65,7 @@ A \textit{protein domain} represents a conserved part of a protein's sequence an
 
 \subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase}
 
-\textit{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase} family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
+The \textit{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase}\cite{family} family is a group of enzymes that play key roles in various biochemical pathways, particularly in the metabolism of vitamins and coenzymes. This family includes two distinct but related enzymes:
 
 \begin{itemize}
 \item \textit{Pyridoxamine Kinase}: This enzyme is involved in the vitamin B6 metabolism pathway. Vitamin B6 exists in different forms, including pyridoxamine, pyridoxal, and pyridoxine. Pyridoxamine kinase specifically catalyzes the phosphorylation of pyridoxamine, converting it into pyridoxamine 5'-phosphate. This is an important step in the salvage pathway of vitamin B6, which is crucial for its recycling and maintenance within the cell.
@@ -83,7 +83,7 @@ In this project, our primary objective is to construct and refine a sequence mod
 
 \subsection{Model Building}
 
-Firstly, we investigated the target family to model - \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} - and verified that the provided representative \texttt{A0A0J9X285} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
+Firstly, we investigated the target family to model - \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} - and verified that the provided representative \texttt{A0A0J9X285}\cite{representative_protein} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
 This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
 
 The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequences using \textit{Clustal Omega}.
@@ -123,7 +123,7 @@ The protein-level performances of the PSSM model are shown in the table below:
 \end{center}
 
 \begin{center}
-    \small{Confusion Matrix for PSSM at protein-level}
+    \small{Fig. 2.1: Confusion Matrix for PSSM at protein-level}
 \end{center}
 
 \subsubsection{PSSM Residue-Level Performance Evaluation}
@@ -150,7 +150,7 @@ The residue-level performances of the PSSM model are shown in the table below:
 \end{center}
 
 \begin{center}
-    \small{Confusion Matrix for PSSM at residue-level}
+    \small{Fig. 2.2: Confusion Matrix for PSSM at residue-level}
 \end{center}
 
 \subsubsection{HMM Protein-Level Performance Evaluation}
@@ -177,7 +177,7 @@ The protein-level performances of the HMM model are shown in the table below:
 \end{center}
 
 \begin{center}
-    \small{Confusion Matrix for HMM at protein-level}
+    \small{Fig. 2.3: Confusion Matrix for HMM at protein-level}
 \end{center}
 
 \subsubsection{HMM Residue-Level Performance Evaluation}
@@ -203,7 +203,7 @@ The residue-level performances of the HMM model are shown in the table below:
 \end{center}
 
 \begin{center}
-    \small{Confusion Matrix for HMM at residue-level}
+    \small{Fig. 2.4: Confusion Matrix for HMM at residue-level}
 \end{center}
 
 As indicated by the confusion matrix, the HMM predictions match the target PFAM family very closely.
@@ -217,7 +217,8 @@ To construct the taxonomic tree, we assembled the lineage data derived from the 
 The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section 6.1} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
-    \includegraphics[scale=0.45]{report/img/taxonomy_tree.png}
+    \includegraphics[scale=0.45]{report/img/taxonomy_tree.png}\\
+    \small{Fig. 3.1: Taxonomic Tree}
 \end{center}
 
 \subsection{Functional Enrichment with Gene Ontology Annotation}
@@ -228,6 +229,10 @@ In order to visualize which GO Terms are characteristic of our family, we can pl
 
 \begin{center}
     \includegraphics[scale=0.4]{report/img/go_term_enrichment.png}
+\end{center}
+
+\begin{center}
+    \small{Fig. 3.2: Enrichment of GO Terms}
 \end{center}
 
 \begin{center}
@@ -256,38 +261,42 @@ In order to visualize which GO Terms are characteristic of our family, we can pl
     \end{tabular}
 \end{center} 
 \begin{center}
-    \small{Most characteristic GO Terms}
+    \small{Fig 3.3: Most characteristic GO Terms}
 \end{center}
 
+\subsubsection{Fisher's Exact Test}
+
+Explaination of Fisher's Exact Test: what is it and how it is used here.
+
+By using Fisher's Exact Test, we realized that the p-value is extremely close to zero (maybe add p=...) for terms with high odds, indicating that they are indeed characteristic of our family. However, as a consequence of how sparse GO Labels are for a sequence, when compared (to the abundance of our limited amout of terms (56) present in our family. ?? -> check this). \\
 
 
-By using Fisher's Exact Test, we realized that the p-value is extremely close to zero (maybe add p=...) for terms with high odds, indicating that they are indeed characteristic of our family. However, as a consequence of how sparse GO Labels are for a sequence, when compared (to the abundance of our limited amout of terms (56) present in our family. ?? -> check this).
 
 Below, we plot a word cloud of the Enriched Terms for each aspect:
 
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_mf.png} \\
     \
-    \small{Enriched terms for aspect: Molecular Function}
+    \small{Fig 3.4: Enriched terms for aspect: Molecular Function}
 \end{center}
 
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_cc.png} \\
     \
-    \small{Enriched terms for aspect: Cellular Component}
+    \small{Fig 3.5: Enriched terms for aspect: Cellular Component}
 \end{center}
 
 \begin{center}
     \includegraphics[scale=0.30]{report/img/word_cloud_bp.png} \\
     \
-    \small{Enriched terms for aspect: Biological Process}
+    \small{Fig 3.6: Enriched terms for aspect: Biological Process}
 \end{center} \\
 
 We then explored the hierarchical structure of the Gene Ontology to discern the most significantly enriched branches relevant to our protein family. \\
 
 High-level terms in Gene Ontology, typically positioned at the top of the hierarchy, encapsulate the broadest categories, covering a diverse range of specific functions, processes, or components. These general terms are less detailed compared to low-level terms, but are instrumental in offering an overarching view of the primary biological functions, processes, or components linked with a set of genes or proteins. \\
 
-Utilizing the GO hierarchy, each GO Term was classified according to its level of specificity. We focused on high-level terms, filtering the GO terms based on their hierarchical level. This approach enabled us to identify the most enriched branches at a more generalized level, revealing key biological processes, molecular functions, and cellular components prominently involved in our protein family. We report them in the table below:
+Leveraging the GO hierarchy, each GO Term was classified according to its level of specificity. We focused on high-level terms, filtering the GO terms based on their hierarchical level. This approach enabled us to identify the most enriched branches at a more generalized level, revealing key biological processes, molecular functions, and cellular components prominently involved in our protein family. We report them in the table below:
 
 \begin{center}
     \begin{tabular}{lccc}
@@ -304,9 +313,7 @@ Utilizing the GO hierarchy, each GO Term was classified according to its level o
 \end{center} 
 \begin{center}
     \small{Table x.x: Most enriched branches}\\
-    \small{cc: cellular component; \\
-            mf: molecular function; \\
-            bp: biological process.}\\
+    \small{cc: cellular component; mf: molecular function}\\
     
 \end{center}
 
@@ -326,25 +333,25 @@ Conservation of a pattern in the same position is indicative of functional signi
 
 \subsubsection{ELM}
 
-There were 18 significant hits in this database. Below, we present the most common one.
+There were 18 significant hits in the \textit{ELM} Database. Below, we present the most common one.
+
+\paragraph{WDR5 WD40 Repeat (blade 5,6)-binding Ligand}
 
 \begin{center}
     \includegraphics[scale=1.17]{report/img/Elm.png} \\
-    \small{Most common Elm motif in our family}
+    \small{Fig 3.7: Most common Elm motif in our family}
 \end{center}
 
-%The WD40 repeat domain protein WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex.
-%(this is copied from a section of \href{http://elm.eu.org/elms/LIG_WD40_WDR5_VDV_1.html}{LIG_WD40_WDR5_VDV_1.html}, not really sure how to describe it with my own words) TO FIX: WRONG LINK
 
 The WD40 repeat is a short structural motif, approximately 40 amino acids in length, often terminating in a tryptophan-aspartic acid (W-D) dipeptide. Proteins that contain WD40 repeats are known as WD-repeat proteins. These repeats are typically involved in protein-protein interactions and can form a beta-propeller structure. Each repeat forms a blade of the propeller, with typically 4 to 8 repeats coming together to form a circular propeller-like structure.
-WDR5 is a protein containing WD40 repeats, which form a beta-propeller structure, crucial for protein-protein interactions. It plays a pivotal role in the regulation of gene transcription, cell cycle progression, and DNA repair through its involvement in post-translational modifications of histones. Specifically, WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex. The WDR5-binding motif, as described by the ELM database (accession \texttt{ELME000365}), is a functional site that interacts with WDR5 between blades 5 and 6 of the WD40 repeat. The WDR5-binding motif is conserved across various species, indicating its importance in biological processes. \\
+WDR5 is a protein containing WD40 repeats, which form a beta-propeller structure, crucial for protein-protein interactions. It plays a pivotal role in the regulation of gene transcription, cell cycle progression, and DNA repair through its involvement in post-translational modifications of histones. Specifically, WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex. The WDR5-binding motif, as described by the ELM database \cite{WDR5} (accession \texttt{ELME000365}), is a functional site that interacts with WDR5 between blades 5 and 6 of the WD40 repeat. The WDR5-binding motif is conserved across various species, indicating its importance in biological processes. \\
 
 Plots for the other 17 motifs can be found in the appendix \hyperref[sec:elm_motifs]{section 6.2}. \\
 
 Other common motifs found are:
 
 \begin{itemize}
-\item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site, where         Glycosaminoglycan are long, linear polysaccharides consisting of repeating      disaccharide units.
+\item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site, where Glycosaminoglycan are long, linear polysaccharides consisting of repeating disaccharide units.
 \item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligands, where the FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins.
 \item \textit{CLV\_PC5K\_5KI1\_1}: A PCSK cleavage site, where PCSK plays a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
 \end{itemize}
@@ -356,18 +363,32 @@ Other common motifs found are:
 
 \subsubsection{ProSite}
 
-There were 4 significant hits in this database:
+There were 4 significant hits in the \textit{ProSite} Database. We report the most common one below:
+
+\paragraph{N-myristoylation Site}
 
 \begin{center}
-    \includegraphics[scale=1]{report/img/prosite.png} \\
-    \small{Most common ProSite motif in our family}
+    \includegraphics[scale=1.05]{report/img/prosite.png} \\
+    \small{Fig 3.8: Most common ProSite motif in our family}
 \end{center}
 
-The other 3 hits were: 
+N-myristoylation consinst in the acylation of eukaryotic proteins by the covalent addition to their N-terminal residue of myristate, a C14-saturated fatty acid \cite{N-myristoylation}.
+N-myristoylation has been observed happening in animals, plants, fungi, protozoans and viruses. It allows for weak protein–protein and protein–lipid interactions and plays an essential role in membrane targeting, protein–protein interactions and functions widely in a variety of signal transduction pathways. 
+
+For example:
 \begin{itemize}
-\item \textit{PS00001}: A N-glycosylation site
-\item \textit{PS00005}: A protein kinase C phosphorylation site
-\item \textit{PS00006} A casein kinase II phophorylation site
+    \item \textit{Apoptosis}: The myristoylation of pro-apoptotic BH3-interacting domain death agonist (Bid) leads to the production of cytochrome c which causes cell death.
+
+    \item \textit{Cancer}: Increased myristoylation of c-Src gene can lead to enhanced cell proliferation and be responsible for transforming normal cells into cancer cells
+\end{itemize} \\
+
+(adapted from wiki)
+
+The other 3 significant hits were: 
+\begin{itemize}
+\item \textit{PS00001}: A N-glycosylation site where oligosaccharides are attached to eukaryotic proteins by binding themselves to the N-terminal residue.
+\item \textit{PS00005}: A protein kinase C phosphorylation site, where protein kinase C manage the phosphorylation of serine or threonine residues near the C-terminal residue.
+\item \textit{PS00006} A casein kinase II phophorylation site, where Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is independent of cyclic nucleotides and calcium. CK-2 function as a regulator of signal transduction pathways.
 \end{itemize}
 
 
@@ -378,18 +399,11 @@ The other 3 hits were:
 
 
 %-------------------------------------------------------------------------
-\section{References}
 
-List and number all bibliographical references in 9-point Times,
-single-spaced, at the end of your paper. When referenced in the text,
-enclose the citation number in square brackets, for
-example.  Where appropriate, include the name(s) of
-editors of referenced books.
-
-%{\small
-%\bibliographystyle{ieee_fullname}
-%\bibliography{egbib}
-%}
+{\small
+\bibliographystyle{ieee_fullname}
+\bibliography{egbib}
+}
 
 \clearpage % Start a new page
 \onecolumn % Switch to one-column layout
@@ -413,12 +427,12 @@ Below, we plot the full-resolution Taxonomic Tree. \\
 \end{center}
 \begin{center}
     \includegraphics[scale=0.8]{report/img/Elm2.png} \\
-    \small{10nth to 18nth most common ELM linear motifs}
+    \small{10th to 18th most common ELM linear motifs}
 \end{center}
 
 \subsection{ProSite}
 \begin{center}
-    \includegraphics[scale=0.88]{report/img/Prosite.png} \\
+    \includegraphics[scale=0.80]{report/img/Prosite.png} \\
     \small{Most common 4 ProSite linear motifs}
 \end{center}
 \end{document}
