@@ -8,6 +8,9 @@
 <b> Authors: Marco Uderzo, Tanner Graves, Claudio Palmeri </b>
 </p>
 
+### Necessary Supporting Files
 
-Supporting files can be downloaded here: https://drive.google.com/file/d/1VQVRF9weMdW6YDs8Q5J8_0vQG0RSOU_N/view?usp=sharing  
-'data' directory should be on the same level as the family.ipynb
+Supporting files can be downloaded (https://drive.google.com/file/d/1VQVRF9weMdW6YDs8Q5J8_0vQG0RSOU_N/view?usp=sharing)[here].
+
+
+Note: The `data` directory should be on the same level as the family.ipynb

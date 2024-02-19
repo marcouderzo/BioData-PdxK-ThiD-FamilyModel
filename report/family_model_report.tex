@@ -86,18 +86,24 @@ In this project, our primary objective is to construct and refine a sequence mod
 Firstly, we investigated the target family to model - \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} - and verified that the provided representative \texttt{A0A0J9X285}\cite{representative_protein} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
 This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
 
-The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequences using \textit{Clustal Omega}.
+The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequence using \textit{Clustal Omega}.
 
 The query sequence overlapped the primary conserved regions of the MSA, and the majority of positions outside of the query had very low occupancy, consisting of sequences that were unusually long. The query bounds for the MSA are observed to be reasonable bounds to trim the MSA, so positions outside this range were trimmed from it. \\
 
-Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukariotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded. \\
+Sequences that opened gaps more than a couple residues long were investigated by referencing the BLAST hit corresponding to that sequence. Many of these instances were from Eukaryotes - which is atypical for this family - and were of reasonable quality. Since it is useful to include this information, no sequences reported by BLAST were discarded. \\
 
-The MSA was finalized by removing the query sequence, and it was then processed to generate a \textit{Position-Specific Scoring Matrix (PSSM)} using the command line \texttt{PSI-BLAST} tool, with the SwissProt database as the reference. Finally, the \textit{Hidden Markov Model (HMM)} was built using the \texttt{hmmer hmmbuild} command.
+The MSA was finalized by removing the query sequence, and it was then processed to generate a \textit{Position-Specific Scoring Matrix (PSSM)} using the command line \texttt{PSI-BLAST} tool, with the \textit{SwissProt} database as the reference. Finally, the \textit{Hidden Markov Model (HMM)} was built using the \texttt{hmmer hmmbuild} command.
 
 \subsection{Model Evaluation}
 
 The PSSM predictions were generated through PSI-BLAST searches against the SwissProt database.
-Parallelly, HMM searches were conducted, the results of which were parsed to extract alignments between the HMM and sequences in the SwissProt database.
+Parallelly, we used hmmer hmmsearch, and the results were parsed to extract alignments between the HMM and sequences in the SwissProt database. It is worth noting that HMM search initially returned far more results than sequences in the family, so we chose an \texttt{E-value} threshold that minimizes the false positive proteins identified by the HMM model to good effect.
+
+Both of the models predict regions in sequences corresponding to our family. We evaluate their performance on two levels:
+\begin{itemize}
+    \item \texit{Protein-level}: are sequences containing the family correctly identified;
+    \item \texit{Residue-level}: are the positions within these sequences correctly identified.
+\end{itemize}
 
 \subsubsection{PSSM Protein-Level Performance Evaluation}
 
@@ -108,11 +114,11 @@ The protein-level performances of the PSSM model are shown in the table below:
         \toprule
         Metric & Value \\
         \midrule
-        Precision & 0.894 \\
-        Recall & 0.227 \\
-        F1-Score & 0.361 \\
-        Balanced Accuracy & 0.613 \\
-        MCC & 0.45 \\
+        Precision & 0.973 \\
+        Recall & 0.48 \\
+        F1-Score & 0.643 \\
+        Balanced Accuracy & 0.740 \\
+        MCC & 0.683 \\
         \bottomrule
     \end{tabular}
 \end{center} \\ 
@@ -140,11 +146,11 @@ The residue-level performances of the PSSM model are shown in the table below:
         \toprule
         Metric & Value \\
         \midrule
-        Precision & 0.91 \\
-        Recall & 0.28 \\
-        F1-Score & 0.429 \\
-        Balanced Accuracy & 0.64 \\
-        MCC & 0.505 \\
+        Precision & 0.980 \\
+        Recall & 0.491 \\
+        F1-Score & 0.655 \\
+        Balanced Accuracy & 0.746 \\
+        MCC & 0.694 \\
         \bottomrule
     \end{tabular}
 \end{center} \\
@@ -222,18 +228,20 @@ The residue-level performances of the HMM model are shown in the table below:
     \small{Fig. 2.4: Confusion Matrix for HMM at residue-level}
 \end{center}
 
-As indicated by the confusion matrix, the HMM predictions match the target PFAM family very closely.
+Both models score very high precision which is due to the fact that the dataset is highly skewed toward negative matches. Only the HMM model is capable of also obtaining a high recall value - and overall much better statistics - thus matching the target PFAM family very closely while the PSSM model only recognizes about half of the target family. Therefore, only the HMM model was used for the next steps of the project.
+
+
 
 \section{Domain Family Characterization}
 
 \subsection{Taxonomy}
 
-To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the protein family under investigation. The lineages were used to generate a comprehensive taxonomic hierarchy, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli). \\
+To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the proteins identified by our HMM model as belonging to our family. The lineages were used to generate a comprehensive taxonomic tree, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli). \\
 
-The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section 6.1} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
+The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section 5.1} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
-    \includegraphics[scale=0.45]{report/img/taxonomy_tree.png}\\
+    \includegraphics[scale=0.40]{report/img/taxonomy_tree.png}\\
     \small{Fig. 3.1: Taxonomic Tree}
 \end{center}
 
@@ -282,10 +290,15 @@ In order to visualize which GO Terms are characteristic of our family, we can pl
 
 \subsubsection{Fisher's Exact Test}
 
-Explaination of Fisher's Exact Test: what is it and how it is used here.
+The Fisher-exact test is useful for testing the nonrandom association between two categorical variables. In our case, possessing a GO term and membership into our family of proteins. In order to conduct the test contingency table for a single GO term of interest must be constructed:
+\[
+\begin{array}{c|c}
+\text{\# in family with term} & \text{\# in family without term} \\ \hline
+\text{\# outside fam. with term} & \text{\# outside fam. without term}
+\end{array}
+\]
 
-By using Fisher's Exact Test, we realized that the p-value is extremely close to zero (maybe add p=...) for terms with high odds, indicating that they are indeed characteristic of our family. However, as a consequence of how sparse GO Labels are for a sequence, when compared (to the abundance of our limited amout of terms (56) present in our family. ?? -> check this). \\
-
+The test reporting a low p-value is evidence of the studied GO term being strongly associated with membership in our family. And indeed, we observe that for the terms with the highest odds, the p-value is extremely close to 0. \\
 
 
 Below, we plot a word cloud of the Enriched Terms for each aspect:
@@ -336,14 +349,14 @@ Leveraging the GO hierarchy, each GO Term was classified according to its level 
 
 
 \subsection{Motifs}
-Motifs are short protein sequences that are often repeated across the genome. These motifs usually coordinates protein-to-protein interaction and are found in the disordered regions. 
+Motifs are short protein sequences that are often repeated across the genome. These motifs usually coordinates protein-to-protein interaction and are found in the disordered regions. \\
 
 Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal two datasets: ELM and ProSite.
 
-For each member of the family we checked if the regular expressions found in the aforementioned two datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions (which can be found with the MobiDB-lite database). This is due to the fact that our protein family is constituted by globular proteins.
+For each member of the family we checked if the regular expressions found in the aforementioned two datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions, which can be found with the MobiDB-lite database. This is due to the fact that our protein family is constituted by globular proteins.\\
 
 Given a motif, the regions where its pattern matches our proteins are overlayed onto Multiple Sequence Alignments. These patterns are then visually inspected to determine the significance of pattern in the family.
-Some patterns are overly general, matching many regions and are labeled as having a high probability of being observed in any given protein sequence from our family. (Example is the first plot)
+Some patterns are overly general, matching many regions and are labeled as having a high probability of being observed in any given protein sequence from our family.
 
 Conservation of a pattern in the same position is indicative of functional significance.
 
@@ -367,10 +380,21 @@ Plots for the other 17 motifs can be found in the appendix \hyperref[sec:elm_mot
 Other common motifs found are:
 
 \begin{itemize}
-\item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site, where Glycosaminoglycan are long, linear polysaccharides consisting of repeating disaccharide units.
-\item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligands, where the FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins.
-\item \textit{CLV\_PC5K\_5KI1\_1}: A PCSK cleavage site, where PCSK plays a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
+\item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site. 
+Glycosaminoglycan are long, linear polysaccharides consisting of repeating disaccharide units. These can be found attached  via a serine residue to proteoglycans which are extracellular proteins found at the cell surface and in the extracellular matrix. The glycosaminoglycan attachment site is an exposed serine which accepts transfer of xylose .c.
+\item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligand. FHA are small domains that form a sandwich of two anti-parallel beta sheets. The FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins and has a role in: cell-cycle checkpoint control, DNA repair, signal transduction, transcriptional regulation, and pre-mRNA splicing.c.
+
+\item \textit{CLV\_PC5K\_5KI1\_1}: A PCSK cleavage site. PCSK plays a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
+The subtilisin-like proprotein convertases play a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
+PCSK1 (proprotein convertase 1) and PCSK2 (proprotein convertase 2) are type I proinsulin-processing enzymes that play a key role in regulating insulin biosynthesis
+The members of the subtilisin-like family are proprotein convertases that process latent precursor proteins into their biologically active products. 
+
 \end{itemize}
+
+
+It is also worth noting that the \textit{ELM} patterns have identified Casein kinase 1 \& 2 Phosphorylation sites, however they do not appear to be as well preserved than as reported by the ProSite patterns. This can likely be attributed to the ELM patterns being too specific and not accommodating sequence variation in the site, but more investigation is needed.
+
+Also interestingly, many patterns are preserved but may appear in different regions. This is one advantage of plotting the patterns on MSAs, as trying to detect the preservation of these patterns at the position level would miss this.
 
 % \begin{center}
     % \includegraphics[scale=0.4]{report/img/Elm2.png} \\
@@ -384,30 +408,24 @@ There were 4 significant hits in the \textit{ProSite} Database. We report the mo
 \paragraph{N-myristoylation Site}
 
 \begin{center}
-    \includegraphics[scale=1.05]{report/img/prosite.png} \\
+    \includegraphics[scale=1]{report/img/prosite.png} \\
     \small{Fig 3.8: Most common ProSite motif in our family}
 \end{center}
 
 N-myristoylation consinst in the acylation of eukaryotic proteins by the covalent addition to their N-terminal residue of myristate, a C14-saturated fatty acid \cite{N-myristoylation}.
-N-myristoylation has been observed happening in animals, plants, fungi, protozoans and viruses. It allows for weak protein–protein and protein–lipid interactions and plays an essential role in membrane targeting, protein–protein interactions and functions widely in a variety of signal transduction pathways. 
-
-For example:
+N-myristoylation has been observed happening in animals, plants, fungi, protozoans and viruses. It allows for weak protein–protein and protein–lipid interactions and plays an essential role in membrane targeting, protein–protein interactions and functions widely in a variety of signal transduction pathways, for example in:
 \begin{itemize}
     \item \textit{Apoptosis}: The myristoylation of pro-apoptotic BH3-interacting domain death agonist (Bid) leads to the production of cytochrome c which causes cell death.
 
     \item \textit{Cancer}: Increased myristoylation of c-Src gene can lead to enhanced cell proliferation and be responsible for transforming normal cells into cancer cells
 \end{itemize} \\
 
-(adapted from wiki)
-
 The other 3 significant hits were: 
 \begin{itemize}
-\item \textit{PS00001}: A N-glycosylation site where oligosaccharides are attached to eukaryotic proteins by binding themselves to the N-terminal residue.
-\item \textit{PS00005}: A protein kinase C phosphorylation site, where protein kinase C manage the phosphorylation of serine or threonine residues near the C-terminal residue.
-\item \textit{PS00006} A casein kinase II phophorylation site, where Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is independent of cyclic nucleotides and calcium. CK-2 function as a regulator of signal transduction pathways.
-\end{itemize}
-
-
+\item \textit{PS00001}: A N-glycosylation site where oligosaccharides are attached to eukaryotic proteins by binding themselves to the N-terminal asparagine residue.\cite{N-glycosylation}
+\item \textit{PS00005}: A protein kinase C phosphorylation site, where protein kinase C manage the phosphorylation of serine or threonine residues near the C-terminal residue.\cite{kinase}
+\item \textit{PS00006} A casein kinase II phophorylation site, where Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is independent of cyclic nucleotides and calcium. CK-2 function as a regulator of signal transduction pathways.\cite{kinase2}
+\end{itemize} \\
 
 \section{Conclusion}
 
@@ -419,7 +437,7 @@ Additionally, our investigation into conserved short motifs using ELM and ProSit
 %-------------------------------------------------------------------------
 
 {\small
-\bibliographystyle{ieee_fullname}
+\bibliographystyle{unsrt}
 \bibliography{egbib}
 }
 
@@ -438,6 +456,9 @@ Below, we plot the full-resolution Taxonomic Tree. \\
 \end{center}
 
 \subsection{ELM}
+
+Below, we plot the top 9 most common ELM Linear Motifs. \\
+
 \label{sec:elm_motifs}
 \begin{center}
     \includegraphics[scale=0.8]{report/img/Elm1.png} \\
@@ -448,9 +469,13 @@ Below, we plot the full-resolution Taxonomic Tree. \\
     \small{10th to 18th most common ELM linear motifs}
 \end{center}
 
+\newpage
 \subsection{ProSite}
+
+Below, we plot the top 4 most common ProSite Linear Motifs. \\
+
 \begin{center}
-    \includegraphics[scale=0.80]{report/img/Prosite.png} \\
+    \includegraphics[scale=0.58]{report/img/Prosite.png} \\
     \small{Most common 4 ProSite linear motifs}
 \end{center}
 \end{document}
