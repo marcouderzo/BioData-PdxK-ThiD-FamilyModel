@@ -10,4 +10,4 @@
 
 
 Supporting files can be downloaded here: https://drive.google.com/file/d/1VQVRF9weMdW6YDs8Q5J8_0vQG0RSOU_N/view?usp=sharing  
-data directory should be on the same level as the family.ipynb
+'data' directory should be on the same level as the family.ipynb
