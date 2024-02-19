@@ -10,7 +10,7 @@
 
 ### Necessary Supporting Files
 
-Supporting files can be downloaded (https://drive.google.com/file/d/1VQVRF9weMdW6YDs8Q5J8_0vQG0RSOU_N/view?usp=sharing)[here].
+Supporting files can be downloaded [here](https://drive.google.com/file/d/1VQVRF9weMdW6YDs8Q5J8_0vQG0RSOU_N/view?usp=sharing).
 
 
 Note: The `data` directory should be on the same level as the family.ipynb
