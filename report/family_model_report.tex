@@ -61,7 +61,7 @@ Claudio Palmeri \\
 
 \subsection{Protein Domains}
 
-A \textit{protein domain} represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact three-dimensional structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
+A \textit{protein domain} represents a conserved part of a protein's sequence and three-dimensional structure, capable of evolving, functioning, and existing independently from the rest of the protein chain. These domains, each forming a stable and compact 3-D structure, are essential components in proteins, often occurring in various combinations across different proteins. Domains are fundamental in molecular evolution, serving as versatile building blocks that can be rearranged to form proteins with diverse functions. This adaptability and independence make them crucial in understanding protein structure and function.
 
 \subsection{Pyridoxamine Kinase / Phosphomethylpyrimidine Kinase}
 
@@ -86,7 +86,7 @@ In this project, our primary objective is to construct and refine a sequence mod
 Firstly, we investigated the target family to model - \textit{Pyridoxamine Kinase/Phosphomethylpyrimidine Kinase} - and verified that the provided representative \texttt{A0A0J9X285}\cite{representative_protein} protein sequence, having Pfam domain \texttt{PF08543}, is indeed characteristic of the protein family. 
 This was done by retrieving the seed alignment used to generate the HMM defining the Pfam family from \textit{InterPro}, and aligning the representative query sequence to the seed alignment using \textit{JalView}.
 
-The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolsters our confidence that performing a homology search with our query sequence will be able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequence using \textit{Clustal Omega}.
+The query spans the length of the seed alignment and the gaps opened in the query correspond to low occupancy regions in the seed alignment. This bolstered our confidence that performing a homology search with our query sequence would have been able to return sequences belonging to the \texttt{PF08543} family. This was done by performing a Position-Specific Iterated BLAST (\texit{PSI-BLAST}) search on \textit{SwissProt}. The results were downloaded as a \texttt{.fasta} file and opened in \textit{JalView}, where we added our query sequence as a reference. The FASTA file was aligned with the query sequence using \textit{Clustal Omega}.
 
 The query sequence overlapped the primary conserved regions of the MSA, and the majority of positions outside of the query had very low occupancy, consisting of sequences that were unusually long. The query bounds for the MSA are observed to be reasonable bounds to trim the MSA, so positions outside this range were trimmed from it. \\
 
@@ -97,9 +97,9 @@ The MSA was finalized by removing the query sequence, and it was then processed 
 \subsection{Model Evaluation}
 
 The PSSM predictions were generated through PSI-BLAST searches against the SwissProt database.
-Parallelly, we used hmmer hmmsearch, and the results were parsed to extract alignments between the HMM and sequences in the SwissProt database. It is worth noting that HMM search initially returned far more results than sequences in the family, so we chose an \texttt{E-value} threshold that minimizes the false positive proteins identified by the HMM model to good effect.
+Parallelly, we used hmmer hmmsearch, and the results were parsed to extract alignments between the HMM and sequences in the SwissProt database. It is worth noting that HMM search initially returned far more results than sequences in the family, so we chose an \texttt{E-value} threshold of \(10^{-38}\) that minimizes the false positive proteins identified by the HMM model to good effect.
 
-Both of the models predict regions in sequences corresponding to our family. We evaluate their performance on two levels:
+Both of the models predict regions in sequences corresponding to our family. We evaluated their performance on two levels:
 \begin{itemize}
     \item \texit{Protein-level}: are sequences containing the family correctly identified;
     \item \texit{Residue-level}: are the positions within these sequences correctly identified.
@@ -353,7 +353,7 @@ Motifs are short protein sequences that are often repeated across the genome. Th
 
 Our objective is to see if any commonly occurring linear motifs appear in our \texttt{PF08543} protein family and to do so we have at our disposal two datasets: ELM and ProSite.
 
-For each member of the family we checked if the regular expressions found in the aforementioned two datasets were sub-sequences of it. However the vast majority of the matches found are outside of disordered regions, which can be found with the MobiDB-lite database. This is due to the fact that our protein family is constituted by globular proteins.\\
+For each member of the family we checked if the regular expressions found in the aforementioned two datasets were sub-sequences of it. To do that, we used a precompiled file\cite{prosite_regex} which correlates \textit{ProSite} entries and their corresponding patterns translated to regular expressions. However, the vast majority of the matches found are outside of disordered regions, which can be found with the \textit{MobiDB-lite} database. This is due to the fact that our protein family is constituted by globular proteins.\\
 
 Given a motif, the regions where its pattern matches our proteins are overlayed onto Multiple Sequence Alignments. These patterns are then visually inspected to determine the significance of pattern in the family.
 Some patterns are overly general, matching many regions and are labeled as having a high probability of being observed in any given protein sequence from our family.
@@ -367,7 +367,7 @@ There were 18 significant hits in the \textit{ELM} Database. Below, we present t
 \paragraph{WDR5 WD40 Repeat (blade 5,6)-binding Ligand}
 
 \begin{center}
-    \includegraphics[scale=1.17]{report/img/Elm.png} \\
+    \includegraphics[scale=0.4]{report/img/Elm.png} \\
     \small{Fig 3.7: Most common Elm motif in our family}
 \end{center}
 
@@ -375,19 +375,18 @@ There were 18 significant hits in the \textit{ELM} Database. Below, we present t
 The WD40 repeat is a short structural motif, approximately 40 amino acids in length, often terminating in a tryptophan-aspartic acid (W-D) dipeptide. Proteins that contain WD40 repeats are known as WD-repeat proteins. These repeats are typically involved in protein-protein interactions and can form a beta-propeller structure. Each repeat forms a blade of the propeller, with typically 4 to 8 repeats coming together to form a circular propeller-like structure.
 WDR5 is a protein containing WD40 repeats, which form a beta-propeller structure, crucial for protein-protein interactions. It plays a pivotal role in the regulation of gene transcription, cell cycle progression, and DNA repair through its involvement in post-translational modifications of histones. Specifically, WDR5 plays a key role in H3K4 methylation and H4K16 acetylation by acting as a scaffold protein for the assembly of the respective core histone methylation and acetylation complex. The WDR5-binding motif, as described by the ELM database \cite{WDR5} (accession \texttt{ELME000365}), is a functional site that interacts with WDR5 between blades 5 and 6 of the WD40 repeat. The WDR5-binding motif is conserved across various species, indicating its importance in biological processes. \\
 
-Plots for the other 17 motifs can be found in the appendix \hyperref[sec:elm_motifs]{section 6.2}. \\
+Plots for the other 17 motifs can be found in the appendix \hyperref[sec:elm_motifs]{section 5.2}. \\
 
 Other common motifs found are:
 
 \begin{itemize}
 \item \textit{MOD\_GlcNHglycan}: A Glycosaminoglycan attachment site. 
-Glycosaminoglycan are long, linear polysaccharides consisting of repeating disaccharide units. These can be found attached  via a serine residue to proteoglycans which are extracellular proteins found at the cell surface and in the extracellular matrix. The glycosaminoglycan attachment site is an exposed serine which accepts transfer of xylose .c.
-\item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligand. FHA are small domains that form a sandwich of two anti-parallel beta sheets. The FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins and has a role in: cell-cycle checkpoint control, DNA repair, signal transduction, transcriptional regulation, and pre-mRNA splicing.c.
+Glycosaminoglycan are long, linear polysaccharides consisting of repeating disaccharide units. These can be found attached  via a serine residue to proteoglycans which are extracellular proteins found at the cell surface and in the extracellular matrix. The glycosaminoglycan attachment site is an exposed serine which accepts transfer of xylose. \cite{MODGlcNHglycan}
+\item \textit{LIG\_FHA\_1}: A FHA phosphopeptide ligand. FHA are small domains that form a sandwich of two anti-parallel beta sheets. The FHA domain is a signal transduction module which recognizes phosphothreonine containing peptides on the ligand proteins and has a role in: cell-cycle checkpoint control, DNA repair, signal transduction, transcriptional regulation, and pre-mRNA splicing.\cite{LIGFHA1}
 
-\item \textit{CLV\_PC5K\_5KI1\_1}: A PCSK cleavage site. PCSK plays a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
+\item \textit{CLV\_PCSK\_SKI1\_1}: A PCSK cleavage site. 
 The subtilisin-like proprotein convertases play a major role in the proteolytic processing of both neuropeptide and peptide hormone precursors.
-PCSK1 (proprotein convertase 1) and PCSK2 (proprotein convertase 2) are type I proinsulin-processing enzymes that play a key role in regulating insulin biosynthesis
-The members of the subtilisin-like family are proprotein convertases that process latent precursor proteins into their biologically active products. 
+PCSK1 (proprotein convertase 1) and PCSK2 (proprotein convertase 2) are type I proinsulin-processing enzymes that play a key role in regulating insulin biosynthesis.\cite{CLVPCSKSKI11}
 
 \end{itemize}
 
@@ -412,7 +411,7 @@ There were 4 significant hits in the \textit{ProSite} Database. We report the mo
     \small{Fig 3.8: Most common ProSite motif in our family}
 \end{center}
 
-N-myristoylation consinst in the acylation of eukaryotic proteins by the covalent addition to their N-terminal residue of myristate, a C14-saturated fatty acid \cite{N-myristoylation}.
+N-myristoylation consists in the acylation of eukaryotic proteins by the covalent addition to their N-terminal residue of myristate, a C14-saturated fatty acid \cite{N-myristoylation}.
 N-myristoylation has been observed happening in animals, plants, fungi, protozoans and viruses. It allows for weak protein–protein and protein–lipid interactions and plays an essential role in membrane targeting, protein–protein interactions and functions widely in a variety of signal transduction pathways, for example in:
 \begin{itemize}
     \item \textit{Apoptosis}: The myristoylation of pro-apoptotic BH3-interacting domain death agonist (Bid) leads to the production of cytochrome c which causes cell death.
@@ -420,12 +419,14 @@ N-myristoylation has been observed happening in animals, plants, fungi, protozoa
     \item \textit{Cancer}: Increased myristoylation of c-Src gene can lead to enhanced cell proliferation and be responsible for transforming normal cells into cancer cells
 \end{itemize} \\
 
-The other 3 significant hits were: 
+The other 3 significant hits in the \textit{ProSite} database are the following: 
 \begin{itemize}
 \item \textit{PS00001}: A N-glycosylation site where oligosaccharides are attached to eukaryotic proteins by binding themselves to the N-terminal asparagine residue.\cite{N-glycosylation}
 \item \textit{PS00005}: A protein kinase C phosphorylation site, where protein kinase C manage the phosphorylation of serine or threonine residues near the C-terminal residue.\cite{kinase}
-\item \textit{PS00006} A casein kinase II phophorylation site, where Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is independent of cyclic nucleotides and calcium. CK-2 function as a regulator of signal transduction pathways.\cite{kinase2}
+\item \textit{PS00006} A casein kinase II phosphorylation site, where Casein kinase II (CK-2) is a protein serine/threonine kinase whose activity is independent of cyclic nucleotides and calcium. CK-2 functions as a regulator of signal transduction pathways.\cite{kinase2}
 \end{itemize} \\
+
+Plots for the top 4 most common motifs in \textit{ProSite} can be found in the appendix at \hyperref[sec:prosite_motifs]{section 5.3}.
 
 \section{Conclusion}
 
@@ -471,6 +472,7 @@ Below, we plot the top 9 most common ELM Linear Motifs. \\
 
 \newpage
 \subsection{ProSite}
+\label{sec:prosite_motifs}
 
 Below, we plot the top 4 most common ProSite Linear Motifs. \\
 
