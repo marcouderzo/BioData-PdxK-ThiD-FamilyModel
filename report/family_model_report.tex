@@ -230,18 +230,15 @@ The residue-level performances of the HMM model are shown in the table below:
 
 Both models score very high precision which is due to the fact that the dataset is highly skewed toward negative matches. Only the HMM model is capable of also obtaining a high recall value - and overall much better statistics - thus matching the target PFAM family very closely while the PSSM model only recognizes about half of the target family. Therefore, only the HMM model was used for the next steps of the project.
 
-
-
 \section{Domain Family Characterization}
 
 \subsection{Taxonomy}
 
-To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the proteins identified by our HMM model as belonging to our family. The lineages were used to generate a comprehensive taxonomic tree, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli). \\
-
+To construct the taxonomic tree, we assembled the lineage data derived from the \textit{SwissProt} database, corresponding to the proteins identified by our HMM model as belonging to our family. The lineages were used to generate a comprehensive taxonomic tree, which was enriched with node-specific information, including taxonomic names and the frequency of each taxon's occurrence within our data. We decided to exclude every node from the diagram that were not on one of the following levels: super-kingdom, kingdom, phylum, class, order, family, genus, species for simplicity's sake because \textit{SwissProt} is inconsistent with how it reports taxonomy information. In our tree, the size of each node indicates how many examples (or leaves) have that taxonomy term. This provides a good visualization of the lineage of taxonomy terms characteristic of our family (i.e. Bacteria, Pseudomonadota, Gammaproteobacteria, Enterobacterales, Enterobacteriaceae, E. coli). 
 The taxonomic tree is shown below. In order to view it in full resolution, we refer to the corresponding \hyperref[sec:taxtree]{section 5.1} in the appendix, or directly to the \texttt{TaxonomyTree.pdf} file that can be found in the supplementary material.
 
 \begin{center}
-    \includegraphics[scale=0.40]{report/img/taxonomy_tree.png}\\
+    \includegraphics[scale=0.35]{report/img/taxonomy_tree.png}\\
     \small{Fig. 3.1: Taxonomic Tree}
 \end{center}
 
